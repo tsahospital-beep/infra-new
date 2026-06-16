@@ -87,9 +87,9 @@
             <h3>Computers &amp; Mini PCs</h3>
             <p>PCs, Mini PCs, workstations and all-in-ones — including Beelink.</p>
           </div>
-          <div class="fcard__art fcard__art--img"><img src="assets/computers.png" alt="Computers and Mini PCs" loading="lazy" /></div>
+          <div class="fcard__art fcard__art--bleed"><img src="assets/pcpcp.png" alt="Computers and Mini PCs" loading="lazy" /></div>
         </article>
-        <article class="fcard fcard--purple">
+        <article class="fcard fcard--purple fcard--greenbg">
           <div class="fcard__body">
             <span class="fcard__tag"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="9.5" rx="1.5"/><path d="M7.5 17h5M10 13.5V17"/></svg>Displays</span>
             <h3>Monitors &amp; accessories</h3>
@@ -105,7 +105,7 @@
           </div>
           <div class="fcard__art fcard__art--img"><img src="assets/networking.png" alt="Networking equipment" loading="lazy" /></div>
         </article>
-        <article class="fcard fcard--blue">
+        <article class="fcard fcard--blue fcard--greenbg">
           <div class="fcard__body">
             <span class="fcard__tag"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 8V3.5h9V8"/><rect x="3" y="8" width="14" height="6" rx="1.5"/><path d="M5.5 12.5h9V17h-9z"/></svg>Print</span>
             <h3>Printers &amp; office hardware</h3>
@@ -121,7 +121,7 @@
           </div>
           <div class="fcard__art fcard__art--img"><img src="assets/headsets.png" alt="Headsets and audio — Jabra" loading="lazy" /></div>
         </article>
-        <article class="fcard fcard--purple">
+        <article class="fcard fcard--purple fcard--greenbg">
           <div class="fcard__body">
             <span class="fcard__tag"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5.5l-4 4.5 4 4.5M13 5.5l4 4.5-4 4.5"/></svg>Software</span>
             <h3>Software &amp; licensing</h3>
@@ -390,6 +390,18 @@
       var steps = document.querySelector('.howsteps');
       var fill = steps && steps.querySelector('.howsteps__fill');
       var rail = steps && steps.querySelector('.howsteps__rail');
+      function layoutRail() {
+        if (!steps || !rail || !fill) return;
+        var hs = steps.querySelectorAll('.hstep');
+        if (hs.length < 2) return;
+        var n0 = hs[0].querySelector('.hstep__n');
+        var nodeH = (n0 && n0.offsetHeight) || 52;
+        var top = hs[0].offsetTop + nodeH / 2;
+        var bottom = hs[hs.length - 1].offsetTop + nodeH / 2;   /* centre of the LAST node */
+        rail.style.top = fill.style.top = top + 'px';
+        rail.style.bottom = fill.style.bottom = 'auto';
+        rail.style.height = (bottom - top) + 'px';              /* line ends at node 03 */
+      }
       function onScroll() {
         if (head) {
           // switch theme exactly when the black hero's bottom crosses the header zone
@@ -410,9 +422,11 @@
           });
         }
       }
+      layoutRail();
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll);
+      window.addEventListener('resize', function () { layoutRail(); onScroll(); });
+      window.addEventListener('load', function () { layoutRail(); onScroll(); });
     })();
   </script>
   <script src="assets/pixel-canvas.js" defer></script>
