@@ -201,18 +201,68 @@
     </div>
   </section>
 
-  <!-- WHY (testimonial component) -->
-  <section class="section testi" id="why">
+  <!-- WHY — full-width integration node-graph (SynthAI style) with pixel-canvas hover cover -->
+  <section class="section intg" id="why">
+    <!-- Animated pixel cover: pixelates in on hover anywhere in the section -->
+    <pixel-canvas
+      data-gap="16"
+      data-speed="35"
+      data-reveal="0.55"
+      data-colors="#bce0d7,#6eb39f,#309076,#1b8a6f"
+      data-variant="icon"
+      data-no-focus
+      aria-hidden="true"></pixel-canvas>
+
     <div class="container">
-      <div class="testi__card">
-        <span class="eyebrow" style="color:var(--n-700)">Why Infra Core</span>
-        <p class="testi__quote" style="margin-top:20px;">“One supplier for the whole office — hardware, networking, licensing and accessories, all in one place. From consultation to deployment and warranty.”</p>
-        <div class="testi__who">
-          <span class="testi__avatar"></span>
-          <span style="text-align:left;">
-            <span class="testi__name" style="display:block;">Infra Core</span>
-            <span class="testi__role">B2B IT solutions · Georgia</span>
+      <div class="intg__stage">
+        <!-- Connector wires: paths START at the centre (600,331) and run
+             OUT to each edge, passing through the inner-lower node, the
+             mid node, then the outer node. pathLength="1" lets the stroke
+             draw from the centre outward on hover. -->
+        <svg class="intg__wires" viewBox="0 0 1200 460" preserveAspectRatio="none" aria-hidden="true">
+          <path pathLength="1" d="M600,331 H408 C348,300 276,236 276,152 H0" />
+          <path pathLength="1" d="M600,331 H792 C852,300 924,236 924,152 H1200" />
+        </svg>
+
+        <!-- Category nodes -->
+        <div class="intg__nodes" aria-hidden="true">
+          <div class="intg__node intg__node--lt intg__node--teal">
+            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><rect x="5.5" y="5.5" width="9" height="9" rx="1.5"/><path d="M8 2.5v3M12 2.5v3M8 14.5v3M12 14.5v3M2.5 8h3M2.5 12h3M14.5 8h3M14.5 12h3"/></svg></span>
+            <span class="intg__nodelabel">Computers</span>
+          </div>
+          <div class="intg__node intg__node--lm intg__node--green">
+            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><path d="M3 8.2a11 11 0 0114 0"/><path d="M5.6 11a7 7 0 018.8 0"/><path d="M8 13.7a3 3 0 014 0"/><path d="M10 16.4h.01"/></svg></span>
+            <span class="intg__nodelabel">Networking</span>
+          </div>
+          <div class="intg__node intg__node--lb intg__node--mint">
+            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><path d="M4 12v-1.5a6 6 0 0112 0V12"/><rect x="3" y="11.5" width="3.5" height="5" rx="1.5"/><rect x="13.5" y="11.5" width="3.5" height="5" rx="1.5"/></svg></span>
+            <span class="intg__nodelabel">Headsets · Jabra</span>
+          </div>
+          <div class="intg__node intg__node--rt intg__node--purple">
+            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><rect x="2.5" y="4" width="15" height="9.5" rx="1.5"/><path d="M7.5 17h5M10 13.5V17"/></svg></span>
+            <span class="intg__nodelabel">Monitors</span>
+          </div>
+          <div class="intg__node intg__node--rm intg__node--blue">
+            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><path d="M5.5 8V3.5h9V8"/><rect x="3" y="8" width="14" height="6" rx="1.5"/><path d="M5.5 12.5h9V17h-9z"/></svg></span>
+            <span class="intg__nodelabel">Printers</span>
+          </div>
+          <div class="intg__node intg__node--rb intg__node--pink">
+            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><path d="M7 5.5l-4 4.5 4 4.5M13 5.5l4 4.5-4 4.5"/></svg></span>
+            <span class="intg__nodelabel">Software</span>
+          </div>
+        </div>
+
+        <!-- Centre content -->
+        <div class="intg__center">
+          <span class="eyebrow intg__eyebrow">
+            <svg class="intg__hub" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M9.8 9.8L6.3 6.3M14.2 9.8l3.5-3.5M9.8 14.2l-3.5 3.5M14.2 14.2l3.5 3.5"/></svg>
+            Why Infra Core
           </span>
+          <h2>One partner wired into your whole office</h2>
+          <p>Hardware, networking, licensing and accessories — all from one supplier. From consultation to deployment and warranty, it&rsquo;s handled in one place.</p>
+          <a href="#contact" class="btn btn--primary intg__cta">Request a quote
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -327,5 +377,6 @@
       window.addEventListener('resize', onScroll);
     })();
   </script>
+  <script src="assets/pixel-canvas.js" defer></script>
 </body>
 </html>
