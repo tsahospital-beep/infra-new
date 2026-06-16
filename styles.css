@@ -161,7 +161,7 @@ button { font: inherit; cursor: pointer; }
   border: 0; border-radius: 8px; background: #111111; color: #fff;
   font-family: var(--f-mono); font-size: 0.8rem; font-weight: 400;
   text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.5s var(--ease), color 0.5s var(--ease);
 }
 .flowbtn__label { margin-right: 34px; transition: opacity 0.5s ease; }
 .flowbtn:hover .flowbtn__label { opacity: 0; }
@@ -169,7 +169,7 @@ button { font: inherit; cursor: pointer; }
   position: absolute; right: 4px; top: 4px; bottom: 4px; z-index: 10;
   display: grid; place-items: center; width: 34px;
   border-radius: 6px; background: #3a3a3a;
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease, background-color 0.5s var(--ease);
 }
 .flowbtn:hover .flowbtn__chip { width: calc(100% - 8px); }
 .flowbtn:active .flowbtn__chip { transform: scale(0.95); }
@@ -188,7 +188,7 @@ button { font: inherit; cursor: pointer; }
   padding-block: 12px;
   /* overlay the hero card so the header sits INSIDE the white block at the top */
   margin-bottom: -76px;
-  transition: background-color 0.3s var(--ease), box-shadow 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
+  transition: background-color 0.5s var(--ease), box-shadow 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
 }
 /* On scroll: FULL-WIDTH frosted glass bar (glassmorphism, not rounded) */
 .site-head.is-scrolled {
@@ -198,16 +198,18 @@ button { font: inherit; cursor: pointer; }
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   box-shadow: 0 4px 20px rgba(20, 30, 40, 0.06);
 }
-.site-head__bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 52px; }
+.site-head__bar { display: flex; align-items: center; justify-content: flex-start; gap: 16px; min-height: 52px; }
 .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 1.15rem; }
 .logo__dot { width: 26px; height: 26px; border-radius: 8px; background: var(--n-950); display: inline-grid; place-items: center; color: #fff; font-family: var(--f-mono); font-size: 0.9rem; }
 .logo__mark { width: 32px; height: 32px; display: inline-flex; flex: none; }
 .logo__mark svg { width: 100%; height: 100%; }
-/* Desktop nav: plain inline links (no pill frame), dark text — like SynthAI */
+/* Desktop nav: plain inline links (no pill frame), dark text — like SynthAI.
+   Pushed to the right, next to the CTA button. */
 .nav {
   display: flex;
   align-items: center;
   gap: 6px;
+  margin-left: auto;
 }
 .nav a {
   padding: 8px 14px;
@@ -217,7 +219,7 @@ button { font: inherit; cursor: pointer; }
   font-size: 0.8rem;
   letter-spacing: 0.04em;
   color: var(--n-900);
-  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  transition: background-color 0.2s var(--ease), color 0.5s var(--ease);
 }
 .nav a:hover { background: var(--n-100); color: var(--n-950); }
 .head__actions { display: flex; align-items: center; gap: 10px; }
@@ -231,13 +233,33 @@ button { font: inherit; cursor: pointer; }
   position: relative;
   overflow: hidden;
   border-radius: var(--r-xl);
-  background:
-    radial-gradient(1100px 500px at 80% 0%, var(--soft-purple), transparent 55%),
-    radial-gradient(700px 400px at 10% 100%, var(--soft-green), transparent 55%),
-    var(--white);
+  background: #0a0a0a;
+  color: #fff;
+  isolation: isolate;
   padding: clamp(104px, 11vw, 150px) 0 clamp(40px, 6vw, 90px);
   margin-bottom: var(--gap);
+  min-height: calc(100svh - 2 * var(--gap));
+  display: grid;
+  align-items: center;
 }
+/* Green aurora glow on the dark hero (animated, breathing) */
+.hero > .container { position: relative; z-index: 1; }
+.hero::before {
+  content: "";
+  position: absolute; inset: -12%; z-index: 0; pointer-events: none;
+  transform-origin: 50% 92%;
+  background:
+    radial-gradient(62% 52% at 50% 104%, rgba(52, 232, 158, 0.45), transparent 72%),
+    radial-gradient(48% 44% at 24% 100%, rgba(28, 170, 128, 0.36), transparent 72%),
+    radial-gradient(48% 44% at 78% 100%, rgba(80, 205, 230, 0.26), transparent 72%),
+    radial-gradient(42% 40% at 62% 100%, rgba(150, 245, 180, 0.24), transparent 72%),
+    radial-gradient(55% 28% at 50% -4%, rgba(46, 220, 150, 0.16), transparent 70%);
+  filter: blur(14px) saturate(1.05);
+  animation: auroraIn 2s ease-out both, auroraBreath 9s ease-in-out 2s infinite alternate;
+}
+@keyframes auroraIn { from { opacity: 0; transform: scale(1.35); } to { opacity: 1; transform: scale(1); } }
+@keyframes auroraBreath { from { transform: scale(1); } to { transform: scale(1.08); } }
+@media (prefers-reduced-motion: reduce) { .hero::before { animation: none; opacity: 1; } }
 .hero__grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -264,13 +286,40 @@ button { font: inherit; cursor: pointer; }
 .hero__visual {
   position: relative;
   aspect-ratio: 1 / 1;
-  border-radius: var(--r-3xl);
-  background:
-    conic-gradient(from 210deg at 50% 50%, #c7b6ff, #b6e3d4, #ffd6ec, #cfe0ff, #c7b6ff);
-  filter: blur(2px) saturate(1.1);
-  box-shadow: var(--shadow-soft);
-  mask: radial-gradient(circle at 50% 50%, #000 38%, transparent 70%);
-  -webkit-mask: radial-gradient(circle at 50% 50%, #000 38%, transparent 70%);
+  display: grid;
+  place-items: center;
+}
+.hero__visual img {
+  width: 92%; height: 92%; object-fit: contain;
+  filter: drop-shadow(0 24px 64px rgba(90, 160, 255, 0.28));
+  animation: heroFloat 6s ease-in-out infinite;
+}
+@keyframes heroFloat { 0%, 100% { transform: translateY(-9px); } 50% { transform: translateY(9px); } }
+@media (prefers-reduced-motion: reduce) { .hero__visual img { animation: none; } }
+
+/* ===== Dark top-hero theme (only the hero section) ===== */
+.hero h1 { color: #fff; }
+.hero__sub { color: rgba(255, 255, 255, 0.72); }
+.hero .eyebrow { color: rgba(255, 255, 255, 0.72); }
+.hero .btn--primary { background: #fff; color: #111; box-shadow: none; }
+.hero .btn--primary:hover { background: #e7e7e7; }
+.hero .btn--light { background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, 0.5); }
+.hero .btn--light:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* Header over the dark hero: light at top, dark (frosted) when scrolled.
+   CTA flips white→black; nav links + logo go light only on desktop-at-top. */
+.flowbtn { background: #fff; color: #111; }
+.flowbtn__chip { background: #111; }
+.site-head.is-scrolled .flowbtn { background: #111; color: #fff; }
+.site-head.is-scrolled .flowbtn__chip { background: #3a3a3a; }
+.site-head .logo span { transition: color 0.5s var(--ease); }
+@media (min-width: 1181px) {
+  .site-head:not(.is-scrolled) .nav a { color: #fff; }
+  .site-head:not(.is-scrolled) .nav a:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
+  .site-head:not(.is-scrolled) .logo span { color: #fff !important; }
+}
+@media (max-width: 1180px) {
+  .site-head:not(.is-scrolled) .navtoggle span { background: #fff; }
 }
 
 /* ---- Stat band ---- */

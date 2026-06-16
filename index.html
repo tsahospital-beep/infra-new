@@ -55,7 +55,7 @@
             <a href="#products" class="btn btn--light">Browse products</a>
           </div>
         </div>
-        <div class="hero__visual" aria-hidden="true"></div>
+        <div class="hero__visual" aria-hidden="true"><img src="assets/hero-shape.png" alt="" /></div>
       </div>
     </div>
   </section>
@@ -298,11 +298,16 @@
   <script>
     (function () {
       var head = document.querySelector('.site-head');
+      var hero = document.querySelector('.hero');
       var steps = document.querySelector('.howsteps');
       var fill = steps && steps.querySelector('.howsteps__fill');
       var rail = steps && steps.querySelector('.howsteps__rail');
       function onScroll() {
-        if (head) head.classList.toggle('is-scrolled', window.scrollY > 16);
+        if (head) {
+          // switch theme exactly when the black hero's bottom crosses the header zone
+          var past = hero ? (hero.getBoundingClientRect().bottom <= 70) : (window.scrollY > 16);
+          head.classList.toggle('is-scrolled', past);
+        }
         if (steps && fill && rail) {
           var r = steps.getBoundingClientRect();
           var vh = window.innerHeight;
