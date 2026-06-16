@@ -192,13 +192,26 @@ button { font: inherit; cursor: pointer; }
 }
 /* On scroll: FULL-WIDTH frosted glass bar (glassmorphism, not rounded) */
 .site-head.is-scrolled {
-  background: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-  box-shadow: 0 4px 20px rgba(20, 30, 40, 0.06);
+  background: transparent;
+  border-bottom: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
-.site-head__bar { display: flex; align-items: center; justify-content: flex-start; gap: 16px; min-height: 52px; }
+.site-head__bar {
+  display: flex; align-items: center; justify-content: flex-start; gap: 16px; min-height: 52px;
+  max-width: 100%; margin-inline: auto; border-radius: 12px;
+  transition: max-width 0.5s var(--ease), padding 0.5s var(--ease), border-radius 0.5s var(--ease), background-color 0.5s var(--ease), box-shadow 0.5s var(--ease), transform 0.5s var(--ease);
+}
+/* scrolled: condense into a long, lightly-rounded black bar aligned to the site grid */
+.site-head.is-scrolled .site-head__bar {
+  max-width: none;
+  margin-inline: 0;
+  padding: 8px 8px 8px 24px;
+  border-radius: 12px;
+  background: #0a0a0a;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.26);
+}
 .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 1.15rem; }
 .logo__dot { width: 26px; height: 26px; border-radius: 8px; background: var(--n-950); display: inline-grid; place-items: center; color: #fff; font-family: var(--f-mono); font-size: 0.9rem; }
 .logo__mark { width: 32px; height: 32px; display: inline-flex; flex: none; }
@@ -310,16 +323,17 @@ button { font: inherit; cursor: pointer; }
    CTA flips white→black; nav links + logo go light only on desktop-at-top. */
 .flowbtn { background: #fff; color: #111; }
 .flowbtn__chip { background: #111; }
-.site-head.is-scrolled .flowbtn { background: #111; color: #fff; }
-.site-head.is-scrolled .flowbtn__chip { background: #3a3a3a; }
+/* dark island carries light text in both states; CTA flips white -> brand green */
+.site-head.is-scrolled .flowbtn { background: #0b6854; color: #fff; }
+.site-head.is-scrolled .flowbtn__chip { background: rgba(255, 255, 255, 0.22); }
 .site-head .logo span { transition: color 0.5s var(--ease); }
 @media (min-width: 1181px) {
-  .site-head:not(.is-scrolled) .nav a { color: #fff; }
-  .site-head:not(.is-scrolled) .nav a:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
-  .site-head:not(.is-scrolled) .logo span { color: #fff !important; }
+  .site-head .nav a { color: #fff; }
+  .site-head .nav a:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
+  .site-head .logo span { color: #fff !important; }
 }
 @media (max-width: 1180px) {
-  .site-head:not(.is-scrolled) .navtoggle span { background: #fff; }
+  .site-head .navtoggle span { background: #fff; }
 }
 
 /* ---- Stat band ---- */
