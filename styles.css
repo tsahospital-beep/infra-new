@@ -395,7 +395,15 @@ button { font: inherit; cursor: pointer; }
 /* bleed treatment: transparent product render sits directly on the dark card
    and overflows the right/bottom edge (clipped by the card's rounded box) */
 .fcard__art--bleed { background: none; border: 0; align-self: stretch; min-height: 340px; position: relative; overflow: visible; }
-.fcard__art--bleed img { position: absolute; top: 56%; right: -22%; transform: translateY(-50%); height: 150%; width: auto; max-width: none; object-fit: contain; border-radius: 0; }
+.fcard__art--bleed img { position: absolute; top: 56%; right: -4%; transform: translateY(-50%); height: 100%; width: auto; max-width: none; object-fit: contain; border-radius: 0; }
+/* wide landscape renders: size by width instead of height so they don't blow up */
+.fcard__art--bleed-wide img { width: 90%; height: auto; right: -6%; top: 72%; }
+/* smaller bleed render (per-card) */
+.fcard__art--bleed-sm img { height: 80%; top: 62%; }
+/* nudge a bleed render further left (per-card) */
+.fcard__art--bleed-left img { right: 6%; }
+/* extra-small bleed render (per-card 30% down from full) */
+.fcard__art--bleed-xs img { height: 70%; }
 
 /* ---- How we work: intro + vertical stepper rail (SynthAI logic) ---- */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
@@ -416,7 +424,7 @@ button { font: inherit; cursor: pointer; }
   font-family: var(--f-mono); font-size: 0.92rem; color: var(--n-400);
   transition: color 0.25s var(--ease), background-color 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease);
 }
-.hstep.is-active .hstep__n { background: #0b6854; color: #fff; border-color: #0b6854; box-shadow: var(--shadow-soft); transform: scale(1.06); }
+.hstep.is-active .hstep__n { background: #161b17; color: #fff; border-color: #161b17; box-shadow: var(--shadow-soft); transform: scale(1.06); }
 .hstep__card { background: var(--n-50); border: 0; border-radius: var(--r-2xl); padding: 24px 26px; }
 .hstep__ico {
   display: inline-flex; align-items: center; justify-content: center;
@@ -427,7 +435,7 @@ button { font: inherit; cursor: pointer; }
 /* dark icon badges (black circle + light-green glyph) — number nodes stay separate */
 .hstep:nth-of-type(1) .hstep__ico,
 .hstep:nth-of-type(2) .hstep__ico,
-.hstep:nth-of-type(3) .hstep__ico { background: #161b17; color: #7fd3ba; }
+.hstep:nth-of-type(3) .hstep__ico { background: #0b6854; color: #fff; }
 .hstep__ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .hstep__card h4 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.3px; }
 .hstep__card p { margin-top: 8px; color: var(--muted); font-size: 0.96rem; }
