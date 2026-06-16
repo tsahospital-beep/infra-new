@@ -1,0 +1,506 @@
+/* ============================================================
+   SynthAI-style design language — STUDY REIMPLEMENTATION
+   Original CSS written from captured design tokens. Neutral
+   placeholder content, no proprietary assets. Reusable for any
+   brand. Tokens measured from synthai.demos.tailgrids.com.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap");
+
+:root {
+  /* Neutral scale (Tailwind neutral, from oklch capture) */
+  --n-50:  #fafafa;
+  --n-100: #f5f5f5;
+  --n-200: #e5e5e5;
+  --n-300: #d4d4d4;
+  --n-400: #a3a3a3;
+  --n-500: #737373;
+  --n-700: #404040;
+  --n-900: #171717;
+  --n-950: #0a0a0a;
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Soft pastel accents (section/card tints) */
+  --soft-green:  #edf4ea;
+  --soft-purple: #ebebfc;
+  --soft-pink:   #f7eff7;
+  --soft-blue:   #eaf0f7;
+
+  /* Roles */
+  --page-bg: var(--n-100);
+  --ink: var(--n-900);
+  --muted: var(--n-500);
+  --line: var(--n-200);
+
+  /* Type */
+  --f-sans: "Figtree", system-ui, sans-serif;
+  --f-mono: "Space Mono", ui-monospace, monospace;
+
+  /* Shape */
+  --r-md: 0.375rem;
+  --r-lg: 0.5rem;
+  --r-xl: 0.75rem;   /* section cards */
+  --r-2xl: 1rem;
+  --r-3xl: 1.5rem;   /* feature cards */
+  --r-pill: 9999px;
+
+  /* Soft shadows (captured) */
+  --shadow-soft: 0 6px 18.6px rgba(208, 208, 208, 0.45);
+  --shadow-card: -10.5px 14.5px 11.15px rgba(0, 0, 0, 0.04), -6px -5px 5px rgba(0, 0, 0, 0.01);
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 0.15s;
+  --t-btn: 0.3s;
+
+  /* Layout */
+  --container: 1280px;
+  --gap: 0.75rem;     /* gap between section cards */
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  padding: var(--gap);            /* the gray frame around the stacked cards */
+  overflow-x: clip;               /* contain the full-bleed header bar */
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--f-sans);
+  font-weight: 500;               /* SIGNATURE: medium-weight large headings */
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+ul { margin: 0; padding: 0; list-style: none; }
+button { font: inherit; cursor: pointer; }
+
+/* Eyebrow label — SIGNATURE: Space Mono, uppercase, tracked */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--n-500);
+}
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 40px);
+}
+
+/* ---- Section card: white, rounded, floating on the gray page ---- */
+.section {
+  background: var(--white);
+  border-radius: var(--r-xl);
+  padding-block: clamp(48px, 8vw, 100px);
+  margin-bottom: var(--gap);
+}
+.section--flush { padding-block: clamp(20px, 3vw, 40px); }
+
+/* ============================================================
+   Buttons — pill, near-black primary lighten on hover
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: var(--r-lg);            /* 8px rectangles, NOT pills */
+  font-family: var(--f-mono);            /* SIGNATURE: Space Mono buttons */
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: background-color var(--t-btn) var(--ease), color var(--t-btn) var(--ease), border-color var(--t-btn) var(--ease);
+}
+.btn--primary { background: var(--n-950); color: #fff; }
+.btn--primary:hover { background: var(--n-700); }
+.btn--light { background: #fff; color: var(--n-900); border: 1px solid var(--n-900); }
+.btn--light:hover { background: var(--n-100); }
+.btn--ghost { background: transparent; color: var(--n-900); }
+.btn--ghost:hover { background: var(--n-100); }
+.btn--sm { min-height: 44px; padding: 0 18px; font-size: 0.8rem; }
+
+/* Header CTA: solid button; chevron chip expands to fill on hover, label fades */
+.flowbtn {
+  position: relative; overflow: hidden; display: inline-flex; align-items: center;
+  min-height: 44px; padding: 0 14px; cursor: pointer;
+  border: 0; border-radius: 8px; background: #111111; color: #fff;
+  font-family: var(--f-mono); font-size: 0.8rem; font-weight: 400;
+  text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+.flowbtn__label { margin-right: 34px; transition: opacity 0.5s ease; }
+.flowbtn:hover .flowbtn__label { opacity: 0; }
+.flowbtn__chip {
+  position: absolute; right: 4px; top: 4px; bottom: 4px; z-index: 10;
+  display: grid; place-items: center; width: 34px;
+  border-radius: 6px; background: #3a3a3a;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease;
+}
+.flowbtn:hover .flowbtn__chip { width: calc(100% - 8px); }
+.flowbtn:active .flowbtn__chip { transform: scale(0.95); }
+.flowbtn__chip svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: reduce) { .flowbtn__label, .flowbtn__chip { transition: none; } }
+
+/* ============================================================
+   Header — floating, pill nav
+   ============================================================ */
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* break out of the body tray padding so the bar is full-bleed edge-to-edge */
+  margin-inline: calc(-1 * var(--gap));
+  padding-block: 12px;
+  /* overlay the hero card so the header sits INSIDE the white block at the top */
+  margin-bottom: -76px;
+  transition: background-color 0.3s var(--ease), box-shadow 0.3s var(--ease), backdrop-filter 0.3s var(--ease);
+}
+/* On scroll: FULL-WIDTH frosted glass bar (glassmorphism, not rounded) */
+.site-head.is-scrolled {
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 20px rgba(20, 30, 40, 0.06);
+}
+.site-head__bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 52px; }
+.logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 1.15rem; }
+.logo__dot { width: 26px; height: 26px; border-radius: 8px; background: var(--n-950); display: inline-grid; place-items: center; color: #fff; font-family: var(--f-mono); font-size: 0.9rem; }
+.logo__mark { width: 32px; height: 32px; display: inline-flex; flex: none; }
+.logo__mark svg { width: 100%; height: 100%; }
+/* Desktop nav: plain inline links (no pill frame), dark text — like SynthAI */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav a {
+  padding: 8px 14px;
+  border-radius: var(--r-lg);
+  font-family: var(--f-mono);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--n-900);
+  transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.nav a:hover { background: var(--n-100); color: var(--n-950); }
+.head__actions { display: flex; align-items: center; gap: 10px; }
+.navtoggle { display: none; width: 44px; height: 44px; border: 0; background: transparent; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
+.navtoggle span { width: 22px; height: 2px; background: var(--n-900); border-radius: 2px; }
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  background:
+    radial-gradient(1100px 500px at 80% 0%, var(--soft-purple), transparent 55%),
+    radial-gradient(700px 400px at 10% 100%, var(--soft-green), transparent 55%),
+    var(--white);
+  padding: clamp(104px, 11vw, 150px) 0 clamp(40px, 6vw, 90px);
+  margin-bottom: var(--gap);
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5.2vw, 3.75rem);
+  line-height: 1.0;
+  letter-spacing: -2px;            /* SIGNATURE: tight display tracking */
+  margin-top: 22px;
+  max-width: 14ch;
+}
+.hero__sub {
+  margin-top: 22px;
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 1.075rem;
+  line-height: 1.7;
+}
+.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+/* Abstract iridescent hero visual (CSS-only stand-in, no asset) */
+.hero__visual {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-3xl);
+  background:
+    conic-gradient(from 210deg at 50% 50%, #c7b6ff, #b6e3d4, #ffd6ec, #cfe0ff, #c7b6ff);
+  filter: blur(2px) saturate(1.1);
+  box-shadow: var(--shadow-soft);
+  mask: radial-gradient(circle at 50% 50%, #000 38%, transparent 70%);
+  -webkit-mask: radial-gradient(circle at 50% 50%, #000 38%, transparent 70%);
+}
+
+/* ---- Stat band ---- */
+.stats { display: flex; flex-wrap: wrap; gap: clamp(24px, 6vw, 80px); align-items: center; justify-content: center; }
+.stat { text-align: center; }
+.stat__n { font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; }
+.stat__l { font-family: var(--f-mono); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.08em; color: var(--muted); margin-top: 6px; }
+
+/* ============================================================
+   Section heading block
+   ============================================================ */
+.shead { max-width: 56ch; margin: 0 auto clamp(36px, 5vw, 64px); text-align: center; }
+.shead h2 { font-size: clamp(1.9rem, 4vw, 3rem); letter-spacing: -2px; line-height: 1.1; margin-top: 16px; }
+.shead h2 .hl { color: var(--n-400); }     /* de-emphasized words, like the original */
+.shead p { margin-top: 16px; color: var(--muted); font-size: 1.05rem; }
+
+/* ============================================================
+   Feature cards — pastel tints
+   ============================================================ */
+/* SIGNATURE: horizontal sticky-stacking pastel panels (SynthAI logic kept) */
+.features { display: flex; flex-direction: column; gap: 24px; position: relative; }
+.fcard {
+  display: flex; flex-direction: row; align-items: center;
+  gap: clamp(32px, 4.5vw, 72px);
+  padding: clamp(36px, 4vw, 64px);
+  border-radius: var(--r-xl);
+  position: sticky;
+}
+.fcard:nth-child(1) { top: 80px; z-index: 1; }
+.fcard:nth-child(2) { top: 96px; z-index: 2; }
+.fcard:nth-child(3) { top: 112px; z-index: 3; }
+.fcard:nth-child(4) { top: 128px; z-index: 4; }
+.fcard:nth-child(5) { top: 144px; z-index: 5; }
+.fcard:nth-child(6) { top: 160px; z-index: 6; }
+.fcard--green  { background: var(--soft-green); }
+.fcard--purple { background: var(--soft-purple); }
+.fcard--pink   { background: var(--soft-pink); }
+.fcard--blue   { background: var(--soft-blue); }
+.fcard__body { flex: 1 1 50%; }
+.fcard__tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--n-700); }
+.fcard__tag svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.fcard h3 { font-size: clamp(1.75rem, 3.8vw, 2.7rem); letter-spacing: -1px; line-height: 1.1; margin-top: 16px; }
+.fcard p { margin-top: 16px; color: var(--n-700); font-size: 1.08rem; max-width: 46ch; }
+.fcard__art {
+  flex: 1 1 50%; align-self: stretch; min-height: 320px;
+  border-radius: var(--r-2xl);
+  background:
+    radial-gradient(160px 160px at 70% 28%, rgba(255,255,255,0.9), transparent 70%),
+    rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.fcard__art--img { overflow: hidden; background: rgba(255, 255, 255, 0.4); }
+.fcard__art img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; }
+
+/* ---- How we work: intro + vertical stepper rail (SynthAI logic) ---- */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+.how__intro h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); letter-spacing: -1.5px; line-height: 1.14; margin-top: 16px; }
+.how__sub { margin-top: 16px; color: var(--muted); font-size: 1.05rem; max-width: 42ch; }
+.how__intro .btn { margin-top: 28px; }
+
+.howsteps { position: relative; display: flex; flex-direction: column; gap: 18px; }
+.howsteps__rail, .howsteps__fill { position: absolute; left: 25px; width: 2px; border-radius: 2px; }
+.howsteps__rail { top: 26px; bottom: 26px; background: var(--n-200); }
+.howsteps__fill { top: 26px; height: 0; background: var(--n-950); transition: height 0.1s linear; }
+.hstep { position: relative; display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start; }
+.hstep__n {
+  position: relative; z-index: 1;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #fff; border: 1px solid var(--n-200);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--f-mono); font-size: 0.92rem; color: var(--n-400);
+  transition: color 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.hstep.is-active .hstep__n { color: var(--n-900); border-color: var(--n-300); box-shadow: var(--shadow-soft); }
+.hstep__card { background: var(--n-50); border: 0; border-radius: var(--r-2xl); padding: 24px 26px; }
+.hstep__ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; border-radius: 50%; margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.7), 0 4px 12px rgba(0, 0, 0, 0.05);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.hstep:nth-of-type(1) .hstep__ico { background: rgba(199, 182, 255, 0.5); color: #6a5cd6; }
+.hstep:nth-of-type(2) .hstep__ico { background: rgba(182, 227, 212, 0.55); color: #3f9b6e; }
+.hstep:nth-of-type(3) .hstep__ico { background: rgba(247, 210, 236, 0.55); color: #b357a0; }
+.hstep__ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.hstep__card h4 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.3px; }
+.hstep__card p { margin-top: 8px; color: var(--muted); font-size: 0.96rem; }
+
+/* ============================================================
+   Integrations marquee — SIGNATURE animation
+   ============================================================ */
+.marquee { overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee__track { display: flex; gap: 56px; width: max-content; animation: marquee 22s linear infinite; }
+.marquee__track:hover { animation-play-state: paused; }
+.marquee__item { display: inline-flex; align-items: center; gap: 10px; color: var(--n-400); font-weight: 600; font-size: 1.3rem; white-space: nowrap; }
+.marquee__item .dot { width: 30px; height: 30px; border-radius: 8px; background: var(--n-200); }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-33.33%); } }
+
+/* ============================================================
+   Testimonial — mint section
+   ============================================================ */
+.testi { background: var(--soft-green); }
+.testi__card { max-width: 880px; margin: 0 auto; text-align: center; }
+.testi__quote { font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 500; line-height: 1.35; }
+.testi__who { display: inline-flex; align-items: center; gap: 12px; margin-top: 28px; }
+.testi__avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--n-300); }
+.testi__name { font-weight: 600; }
+.testi__role { font-family: var(--f-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+/* Why cards on the mint section */
+.whyrow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.whycard { background: rgba(255, 255, 255, 0.72); border: 1px solid rgba(0, 0, 0, 0.05); border-radius: var(--r-2xl); padding: 28px; }
+.whycard h3 { font-size: 1.25rem; font-weight: 500; letter-spacing: -0.5px; }
+.whycard p { margin-top: 10px; color: var(--n-700); }
+
+/* ============================================================
+   FAQ accordion (native <details>)
+   ============================================================ */
+.faq { max-width: 820px; margin: 0 auto; }
+.faq__item { border-bottom: 1px solid var(--line); }
+.faq__item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 4px;
+  font-size: 1.12rem;
+  font-weight: 500;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after { content: "+"; font-family: var(--f-mono); font-size: 1.4rem; color: var(--muted); transition: transform var(--t-fast) var(--ease); }
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item p { padding: 0 4px 24px; color: var(--muted); max-width: 68ch; }
+
+/* Services as gradient cards (badge · title · desc · CTA · decorative art) */
+.svccards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.gcard {
+  position: relative; overflow: hidden; border-radius: var(--r-2xl);
+  padding: 32px; min-height: 300px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.gcard:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.gcard--green  { background: linear-gradient(135deg, #d1fae5, rgba(153, 246, 228, 0.5)); }
+.gcard--purple { background: linear-gradient(135deg, #ede9fe, rgba(199, 210, 254, 0.5)); }
+.gcard--orange { background: linear-gradient(135deg, #ffedd5, rgba(253, 230, 138, 0.5)); }
+.gcard--gray   { background: linear-gradient(135deg, #f1f5f9, rgba(226, 232, 240, 0.6)); }
+.gcard__art {
+  position: absolute; right: -6%; bottom: -8%; width: 210px; height: 210px;
+  opacity: 0.85; pointer-events: none;
+  transition: transform 0.45s var(--ease);
+}
+.gcard:hover .gcard__art { transform: scale(1.1) rotate(3deg); }
+.gcard__art svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.5; }
+.gcard--green .gcard__art  { color: #0f9b6e; }
+.gcard--purple .gcard__art { color: #7065d6; }
+.gcard--orange .gcard__art { color: #ea7a2e; }
+.gcard--gray .gcard__art   { color: #64748b; }
+.gcard__top { position: relative; z-index: 1; }
+.gcard__badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; margin-bottom: 18px; border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  font-size: 0.8rem; font-weight: 500; color: rgba(20, 22, 28, 0.82);
+}
+.gcard__badge .dot { width: 8px; height: 8px; border-radius: 50%; }
+.gcard h3 { font-size: 1.45rem; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 8px; color: var(--ink); }
+.gcard__top p { color: rgba(20, 22, 28, 0.66); max-width: 26ch; }
+.gcard__cta { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+.gcard__cta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.3s var(--ease); }
+.gcard:hover .gcard__cta svg { transform: translateX(4px); }
+@media (max-width: 760px) { .svccards { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   Footer — black rounded card with CTA
+   ============================================================ */
+.foot {
+  background: var(--black);
+  color: #d4d4d4;
+  border-radius: 22px;
+  padding: 14px;
+}
+/* Nested CTA card: LIGHT iridescent surface with dark text (per spec) */
+.foot__cta {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  text-align: center;
+  padding: clamp(48px, 7vw, 90px) 20px;
+  background:
+    radial-gradient(700px 340px at 30% 0%, var(--soft-purple), transparent 60%),
+    radial-gradient(680px 320px at 80% 100%, var(--soft-green), transparent 60%),
+    radial-gradient(500px 300px at 60% 50%, var(--soft-pink), transparent 70%),
+    #ffffff;
+}
+.foot__cta h2 { color: var(--n-900); letter-spacing: -2px; font-size: clamp(1.9rem, 4vw, 3.25rem); max-width: 18ch; margin: 16px auto 0; }
+.foot__cta .btn--primary { margin-top: 30px; }
+.foot__cols {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 32px;
+  padding: 48px clamp(20px, 4vw, 48px) 20px;
+}
+.foot__cols h5 { color: #fff; font-size: 0.85rem; font-family: var(--f-mono); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 14px; font-weight: 400; }
+.foot__cols a { display: block; padding: 6px 0; color: #a3a3a3; font-size: 0.92rem; transition: color var(--t-fast) var(--ease); }
+.foot__cols a:hover { color: #fff; }
+.foot__tag { color: #a3a3a3; max-width: 34ch; margin-top: 14px; font-size: 0.92rem; }
+.foot__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgba(255,255,255,0.1); margin: 0 clamp(20px,4vw,48px); padding: 18px 0; color: #737373; font-size: 0.82rem; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 980px) {
+  .fcard { flex-direction: column; align-items: flex-start; position: static; gap: 24px; }
+  .fcard__art { width: 100%; min-height: 180px; }
+  .whyrow { grid-template-columns: 1fr; }
+  .hero__grid, .split { grid-template-columns: 1fr; }
+  .hero__visual { max-width: 460px; order: -1; margin-inline: auto; width: 100%; }
+  .foot__cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .nav { display: none; }
+  .navtoggle { display: inline-flex; }
+  .head__actions .btn--sm { display: none; }
+}
+@media (max-width: 560px) {
+  .foot__cols { grid-template-columns: 1fr; }
+  .stats { gap: 28px; }
+}
