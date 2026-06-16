@@ -395,7 +395,7 @@ button { font: inherit; cursor: pointer; }
 /* bleed treatment: transparent product render sits directly on the dark card
    and overflows the right/bottom edge (clipped by the card's rounded box) */
 .fcard__art--bleed { background: none; border: 0; align-self: stretch; min-height: 340px; position: relative; overflow: visible; }
-.fcard__art--bleed img { position: absolute; top: 56%; right: -22%; transform: translateY(-50%); height: 162%; width: auto; max-width: none; object-fit: contain; border-radius: 0; }
+.fcard__art--bleed img { position: absolute; top: 56%; right: -22%; transform: translateY(-50%); height: 150%; width: auto; max-width: none; object-fit: contain; border-radius: 0; }
 
 /* ---- How we work: intro + vertical stepper rail (SynthAI logic) ---- */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
