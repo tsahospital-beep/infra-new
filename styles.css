@@ -972,7 +972,13 @@ button { font: inherit; cursor: pointer; }
   .whyrow { grid-template-columns: 1fr; }
   .hero__grid, .split { grid-template-columns: 1fr; }
   .hero__visual { display: none; }
-  .hero__art { height: 72%; right: -24%; opacity: 0.3; }
+  /* phone: render rotated 90deg (points up), full opacity, rising from + bleeding off the bottom */
+  .hero__art {
+    top: auto; right: auto; bottom: 0; left: 50%;
+    width: 150%; height: auto; max-width: none; opacity: 1;
+    transform: translate(-50%, 20%) rotate(90deg);
+    transform-origin: center center;
+  }
   .foot__cols { grid-template-columns: 1fr 1fr; }
 }
 /* Integration: below the width where the wide node-graph fits cleanly,
@@ -990,11 +996,11 @@ button { font: inherit; cursor: pointer; }
 
 @media (max-width: 760px) {
   .nav { display: none; }
-  .navtoggle { display: inline-flex; }
+  /* burger removed on mobile per request — show the "Request a quote" CTA on the right instead */
+  .navtoggle { display: none; }
   .head__actions .btn--sm { display: none; }
-  /* the header CTA is a .flowbtn, not .btn--sm — hide it so the bar
-     fits and only the menu toggle remains (prevents mobile overflow) */
-  .head__actions .flowbtn { display: none; }
+  .head__actions .flowbtn { display: inline-flex; font-size: 0.72rem; padding: 0 11px; min-height: 40px; }
+  .head__actions .flowbtn .flowbtn__label { margin-right: 30px; }
 }
 @media (max-width: 560px) {
   .foot__cols { grid-template-columns: 1fr; }
