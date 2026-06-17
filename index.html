@@ -6,6 +6,7 @@
   <title>InfraCore — SynthAI-style preview</title>
   <meta name="description" content="InfraCore content in the SynthAI design language (study preview)." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -26,6 +27,11 @@
           <span style="color:#0b6854;font-weight:700;">Infra</span><span style="color:#23806a;font-weight:600;">Core</span>
         </a>
         <nav class="nav">
+          <div class="langsw" role="group" aria-label="Language">
+            <span class="langsw__thumb" aria-hidden="true"></span>
+            <button type="button" class="langsw__btn is-active" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" class="langsw__btn" data-lang="ka" aria-pressed="false">KA</button>
+          </div>
           <a href="#products">Products</a>
           <a href="#services">Services</a>
           <a href="#how">How we work</a>
@@ -294,13 +300,10 @@
 
         <!-- 3 · DELIVERY & INSTALLATION (dark, wide) — route warehouse → office -->
         <article class="bento__card bento__card--dark bento__delivery">
-          <h3>Delivery &amp; installation</h3>
-          <p class="bento__desc">Fast delivery, setup and full office fit-out — turnkey.</p>
-          <div class="bento__viz route" aria-hidden="true">
-            <svg class="route__svg" viewBox="0 0 480 160" preserveAspectRatio="none"><path class="route__line" d="M40 118 C150 118 150 48 250 48 S360 110 440 70" /></svg>
-            <span class="rnode rnode--start"><i class="fa-solid fa-warehouse" aria-hidden="true"></i></span>
-            <span class="rnode rnode--end"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
-            <span class="route__truck"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></span>
+          <div class="route__map" id="deliveryMap" aria-hidden="true"></div>
+          <div class="bento__delivery-head">
+            <h3>Delivery &amp; installation</h3>
+            <p class="bento__desc">Fast delivery, setup and full office fit-out — turnkey.</p>
           </div>
         </article>
 
@@ -311,7 +314,14 @@
           <div class="bento__viz chat" aria-hidden="true">
             <div class="bubble bubble--in">Which mini PCs suit our new office?</div>
             <div class="bubble bubble--out">
-              <span class="bubble__av"></span>
+              <span class="bubble__av"><svg viewBox="0 0 64 64" aria-hidden="true">
+                <g transform="rotate(0 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#0b6854" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#0b6854"/></g>
+                <g transform="rotate(60 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#bce0d7" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#bce0d7"/></g>
+                <g transform="rotate(120 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#309076" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#309076"/></g>
+                <g transform="rotate(180 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#6eb39f" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#6eb39f"/></g>
+                <g transform="rotate(240 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#0b6854" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#0b6854"/></g>
+                <g transform="rotate(300 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#6eb39f" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#6eb39f"/></g>
+              </svg></span>
               <span>Beelink SER for the desks + Jabra headsets. I'll send a full quote.</span>
             </div>
             <div class="chat__status"><span class="chat__dot"></span>Support online · replies in minutes</div>
@@ -423,20 +433,48 @@
             <div class="qfield"><label for="qf-email">Email</label><input id="qf-email" name="email" type="email" autocomplete="email"></div>
           </div>
           <div class="qform__row">
-            <div class="qfield"><label for="qf-cat">Category</label>
-              <select id="qf-cat" name="category">
-                <option value="">—</option>
-                <option>Computers &amp; Mini PCs</option>
-                <option>Monitors &amp; accessories</option>
-                <option>Networking equipment</option>
-                <option>Printers &amp; office hardware</option>
-                <option>Headsets &amp; audio</option>
-                <option>Software &amp; licensing</option>
-                <option>Full office setup</option>
-                <option>Other</option>
-              </select>
+            <div class="qfield"><label id="qf-cat-label">Category</label>
+              <div class="ddm">
+                <button type="button" class="ddm__trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="qf-cat-label">
+                  <span class="ddm__value is-placeholder" data-ddm-value>—</span>
+                  <svg class="ddm__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <input type="hidden" name="category" value="">
+                <ul class="ddm__menu" role="listbox" aria-label="Category">
+                  <li class="ddm__item" role="option" data-val="">—</li>
+                  <li class="ddm__item" role="option" data-val="Computers &amp; Mini PCs">Computers &amp; Mini PCs</li>
+                  <li class="ddm__item" role="option" data-val="Monitors &amp; accessories">Monitors &amp; accessories</li>
+                  <li class="ddm__item" role="option" data-val="Networking equipment">Networking equipment</li>
+                  <li class="ddm__item" role="option" data-val="Printers &amp; office hardware">Printers &amp; office hardware</li>
+                  <li class="ddm__item" role="option" data-val="Headsets &amp; audio">Headsets &amp; audio</li>
+                  <li class="ddm__item" role="option" data-val="Software &amp; licensing">Software &amp; licensing</li>
+                  <li class="ddm__item" role="option" data-val="Full office setup">Full office setup</li>
+                  <li class="ddm__item" role="option" data-val="Other">Other</li>
+                </ul>
+              </div>
             </div>
-            <div class="qfield"><label for="qf-industry">Industry / sector</label><input id="qf-industry" name="industry" type="text" placeholder="e.g. legal, restaurant/food, retail, clinic…"></div>
+            <div class="qfield"><label id="qf-ind-label">Industry / sector</label>
+              <div class="ddm">
+                <button type="button" class="ddm__trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="qf-ind-label">
+                  <span class="ddm__value is-placeholder" data-ddm-value>—</span>
+                  <svg class="ddm__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <input type="hidden" name="industry" value="">
+                <ul class="ddm__menu" role="listbox" aria-label="Industry / sector">
+                  <li class="ddm__item" role="option" data-val="">—</li>
+                  <li class="ddm__item" role="option" data-val="Legal">Legal</li>
+                  <li class="ddm__item" role="option" data-val="Restaurant / food">Restaurant / food</li>
+                  <li class="ddm__item" role="option" data-val="Retail">Retail</li>
+                  <li class="ddm__item" role="option" data-val="Clinic / healthcare">Clinic / healthcare</li>
+                  <li class="ddm__item" role="option" data-val="Education">Education</li>
+                  <li class="ddm__item" role="option" data-val="Finance / banking">Finance / banking</li>
+                  <li class="ddm__item" role="option" data-val="Hospitality">Hospitality</li>
+                  <li class="ddm__item" role="option" data-val="Manufacturing">Manufacturing</li>
+                  <li class="ddm__item" role="option" data-val="__other__">Other…</li>
+                </ul>
+                <input type="text" class="ddm__other" placeholder="Your industry / sector" hidden>
+              </div>
+            </div>
           </div>
           <div class="qfield"><label for="qf-msg">Message</label><textarea id="qf-msg" name="message" rows="3" placeholder="How many workstations? What do you need?"></textarea></div>
           <label class="qconsent"><input type="checkbox" name="consent" required><span>I consent to the processing of my personal data in order to respond to this inquiry.</span></label>
@@ -499,17 +537,47 @@
       if (!dlg) return;
 
       function openModal() {
+        if (dlg.open) return;
+        dlg.classList.remove('qm--closing');
         if (typeof dlg.showModal === 'function') dlg.showModal();
         else dlg.setAttribute('open', '');
+        var sbw = window.innerWidth - document.documentElement.clientWidth;   // scrollbar width
         document.body.style.overflow = 'hidden';
+        if (sbw > 0) document.body.style.paddingRight = 'calc(var(--gap) + ' + sbw + 'px)';   // no reflow
         var first = dlg.querySelector('#qf-name');
         if (first) setTimeout(function () { first.focus(); }, 40);
       }
-      function closeModal() {
-        if (typeof dlg.close === 'function') dlg.close();
+      function finishClose() {
+        dlg.classList.remove('qm--closing');
+        if (dlg.open && typeof dlg.close === 'function') dlg.close();
         else dlg.removeAttribute('open');
         document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
       }
+      function closeModal() {
+        if (!dlg.open || dlg.classList.contains('qm--closing')) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { finishClose(); return; }
+        dlg.classList.add('qm--closing');           // play the slide-down, then close
+        var done = function (e) {
+          if (e && e.target !== dlg) return;          // ignore bubbled child animations
+          dlg.removeEventListener('animationend', done);
+          finishClose();
+        };
+        dlg.addEventListener('animationend', done);
+        setTimeout(function () { done({ target: dlg }); }, 420);   // safety fallback
+      }
+      /* Esc → close an open dropdown first, otherwise animate the modal down */
+      dlg.addEventListener('cancel', function (e) {
+        e.preventDefault();
+        var openDd = dlg.querySelector('.ddm.is-open');
+        if (openDd) {
+          openDd.classList.remove('is-open');
+          var t = openDd.querySelector('.ddm__trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+          return;
+        }
+        closeModal();
+      });
 
       /* any "Request a quote" link/button opens the modal */
       document.querySelectorAll('a, button').forEach(function (el) {
@@ -528,7 +596,7 @@
         var inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
         if (!inside) closeModal();
       });
-      dlg.addEventListener('close', function () { document.body.style.overflow = ''; });
+      dlg.addEventListener('close', function () { document.body.style.overflow = ''; document.body.style.paddingRight = ''; });
 
       /* form → Web3Forms (AJAX, so the modal stays + shows inline success) */
       var form = document.getElementById('quoteForm');
@@ -562,5 +630,166 @@
     })();
   </script>
   <script src="assets/pixel-canvas.js" defer></script>
+  <script>
+    /* Custom animated dropdown (listbox) — writes the choice into a hidden input */
+    (function () {
+      document.querySelectorAll('.ddm').forEach(function (ddm) {
+        var trigger = ddm.querySelector('.ddm__trigger');
+        var valueEl = ddm.querySelector('[data-ddm-value]');
+        var input = ddm.querySelector('input[type="hidden"]');
+        var other = ddm.querySelector('.ddm__other');   // optional free-text for "Other…"
+        var items = Array.prototype.slice.call(ddm.querySelectorAll('.ddm__item'));
+        if (!trigger || !input) return;
+
+        function open() { ddm.classList.add('is-open'); trigger.setAttribute('aria-expanded', 'true'); }
+        function close() { ddm.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); }
+
+        trigger.addEventListener('click', function (e) {
+          e.stopPropagation();
+          ddm.classList.contains('is-open') ? close() : open();
+        });
+
+        items.forEach(function (it) {
+          it.addEventListener('click', function () {
+            var v = it.getAttribute('data-val') || '';
+            var isOther = v === '__other__';
+            valueEl.textContent = it.textContent;
+            valueEl.classList.toggle('is-placeholder', v === '');
+            items.forEach(function (x) { x.setAttribute('aria-selected', x === it ? 'true' : 'false'); });
+            if (other) other.hidden = !isOther;
+            input.value = isOther ? (other ? other.value : '') : v;   // "Other" → use typed text
+            close();
+            if (isOther && other) other.focus(); else trigger.focus();
+          });
+        });
+
+        if (other) other.addEventListener('input', function () { input.value = other.value; });
+
+        document.addEventListener('click', function (e) { if (!ddm.contains(e.target)) close(); });
+      });
+    })();
+  </script>
+  <script>
+    /* Language switcher (EN / KA) — toggles active state + <html lang>, persists choice */
+    (function () {
+      var btns = Array.prototype.slice.call(document.querySelectorAll('.langsw__btn'));
+      if (!btns.length) return;
+      var sw = document.querySelector('.langsw');
+      function setLang(lang) {
+        btns.forEach(function (b) {
+          var on = b.getAttribute('data-lang') === lang;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        if (sw) sw.classList.toggle('is-ka', lang === 'ka');   // slides the thumb
+        document.documentElement.lang = lang;
+        try { localStorage.setItem('lang', lang); } catch (e) {}
+      }
+      var saved;
+      try { saved = localStorage.getItem('lang'); } catch (e) {}
+      if (saved === 'en' || saved === 'ka') setLang(saved);
+      function current() { var a = sw && sw.querySelector('.langsw__btn.is-active'); return a ? a.getAttribute('data-lang') : 'en'; }
+      /* click anywhere on the switch flips the language */
+      if (sw) sw.addEventListener('click', function () { setLang(current() === 'ka' ? 'en' : 'ka'); });
+    })();
+  </script>
+  <script defer src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script>
+    /* Delivery card — real street route (MapLibre + OSRM), Tbilisi warehouse → office */
+    window.addEventListener('load', function () {
+      var el = document.getElementById('deliveryMap');
+      if (!el || typeof maplibregl === 'undefined') return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var A = [44.7682, 41.7117];   // warehouse — Nino Ramishvili St, Tbilisi (our HQ)
+      var B = [44.8545, 41.6889];   // delivery destination — Jikia St, Tbilisi
+
+      var map = new maplibregl.Map({
+        container: el,
+        style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+        center: [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2],
+        zoom: 12.4,
+        interactive: false,
+        attributionControl: false
+      });
+
+      map.on('load', function () {
+        var url = 'https://router.project-osrm.org/route/v1/driving/' +
+          A[0] + ',' + A[1] + ';' + B[0] + ',' + B[1] + '?overview=full&geometries=geojson';
+        fetch(url)
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            var c = d && d.routes && d.routes[0] && d.routes[0].geometry && d.routes[0].geometry.coordinates;
+            draw(c && c.length > 1 ? c : [A, B]);
+          })
+          .catch(function () { draw([A, B]); });
+      });
+
+      function lineFeat(c) { return { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: c } }; }
+
+      function marker(cls, icon, lngLat) {
+        var e = document.createElement('div');
+        e.className = cls;
+        e.innerHTML = '<i class="fa-solid ' + icon + '"></i>';
+        return new maplibregl.Marker({ element: e }).setLngLat(lngLat).addTo(map);
+      }
+
+      function draw(coords) {
+        // pending route (red) under the delivered route (green) which grows as the truck moves
+        map.addSource('route', { type: 'geojson', data: lineFeat(coords) });
+        map.addLayer({ id: 'route-pending', type: 'line', source: 'route', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#ffffff', 'line-width': 2.4, 'line-opacity': 0.9 } });
+        map.addSource('route-done', { type: 'geojson', data: lineFeat([coords[0], coords[0]]) });
+        map.addLayer({ id: 'route-done', type: 'line', source: 'route-done', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#34e89e', 'line-width': 3, 'line-opacity': 1 } });
+
+        marker('mk mk--wh', 'fa-warehouse', A);        // warehouse
+        marker('mk mk--dest', 'fa-building', B);   // office (delivery location)
+
+        var bounds = coords.reduce(function (bb, c) { return bb.extend(c); }, new maplibregl.LngLatBounds(coords[0], coords[0]));
+        map.fitBounds(bounds, { padding: { top: 140, bottom: 14, left: 24, right: 24 }, duration: 0, maxZoom: 12 });
+
+        if (reduce) { map.getSource('route-done').setData(lineFeat(coords)); return; }
+        animateDelivery(coords);
+      }
+
+      function animateDelivery(coords) {
+        var elm = document.createElement('div');
+        elm.className = 'route__truckmk';
+        elm.innerHTML = '<i class="fa-solid fa-truck-fast"></i>';
+        var truck = new maplibregl.Marker({ element: elm }).setLngLat(coords[0]).addTo(map);
+        var done = map.getSource('route-done');
+        var N = coords.length;
+
+        // cumulative distance → constant-speed (smooth) motion regardless of segment length
+        var cum = [0];
+        for (var k = 1; k < N; k++) {
+          var a = coords[k - 1], b = coords[k];
+          var s = Math.cos(a[1] * Math.PI / 180);
+          var dx = (b[0] - a[0]) * s, dy = (b[1] - a[1]);
+          cum[k] = cum[k - 1] + Math.sqrt(dx * dx + dy * dy);
+        }
+        var total = cum[N - 1] || 1;
+        var DURATION = 16000;        // ms for the full trip — slow & calm
+        var PAUSE = 0.12;            // fraction of the loop spent resting at the end (delivered)
+        var startTs = null;
+
+        function frame(ts) {
+          if (startTs === null) startTs = ts;
+          var p = ((ts - startTs) % DURATION) / DURATION;        // 0..1 loop
+          var prog = Math.min(1, p / (1 - PAUSE));               // hold full at the end before resetting
+          var d = prog * total;
+          var i = 1;
+          while (i < N && cum[i] < d) i++;
+          var c0 = coords[i - 1], c1 = coords[i] || c0;
+          var span = (cum[i] - cum[i - 1]) || 1;
+          var frac = (d - cum[i - 1]) / span;
+          var head = [c0[0] + (c1[0] - c0[0]) * frac, c0[1] + (c1[1] - c0[1]) * frac];
+          truck.setLngLat(head);
+          var seg = coords.slice(0, i); seg.push(head);
+          done.setData(lineFeat(seg));
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+    });
+  </script>
 </body>
 </html>
