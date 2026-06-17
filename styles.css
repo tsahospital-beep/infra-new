@@ -318,7 +318,7 @@ button { font: inherit; cursor: pointer; }
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  height: 92%;
+  height: 112%;
   width: auto;
   max-width: none;
   z-index: 0;
