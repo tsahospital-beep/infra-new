@@ -229,8 +229,8 @@ button { font: inherit; cursor: pointer; }
 }
 .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 1.15rem; }
 .logo__dot { width: 26px; height: 26px; border-radius: 8px; background: var(--n-950); display: inline-grid; place-items: center; color: #fff; font-family: var(--f-mono); font-size: 0.9rem; }
-.logo__mark { width: 32px; height: 32px; display: inline-flex; flex: none; }
-.logo__mark svg { width: 100%; height: 100%; }
+.logo__mark { height: 30px; display: inline-flex; align-items: center; flex: none; }
+.logo__mark img { height: 100%; width: auto; display: block; }
 /* Desktop nav: plain inline links (no pill frame), dark text — like SynthAI.
    Pushed to the right, next to the CTA button. */
 .nav {
