@@ -1020,6 +1020,9 @@ button { font: inherit; cursor: pointer; }
   /* nav (which carried margin-left:auto) is hidden on mobile, so pin the CTA to the right here */
   .head__actions { margin-left: auto; }
   .logo { margin-left: 6px; }   /* tiny nudge right on phone */
+  /* phone: the island's desktop 24px left padding made the logo jump right when the
+     sticky appeared — trim it so the logo holds the same spot in both states (no shift) */
+  .site-head.is-scrolled .site-head__bar { padding-left: 8px; }
   .head__actions .btn--sm { display: none; }
   .head__actions .flowbtn { display: inline-flex; font-size: 0.72rem; padding: 0 11px; min-height: 40px; }
   .head__actions .flowbtn .flowbtn__label { margin-right: 30px; }
