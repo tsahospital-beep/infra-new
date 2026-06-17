@@ -998,6 +998,9 @@ button { font: inherit; cursor: pointer; }
   .nav { display: none; }
   /* burger removed on mobile per request — show the "Request a quote" CTA on the right instead */
   .navtoggle { display: none; }
+  /* nav (which carried margin-left:auto) is hidden on mobile, so pin the CTA to the right here */
+  .head__actions { margin-left: auto; }
+  .logo { margin-left: 6px; }   /* tiny nudge right on phone */
   .head__actions .btn--sm { display: none; }
   .head__actions .flowbtn { display: inline-flex; font-size: 0.72rem; padding: 0 11px; min-height: 40px; }
   .head__actions .flowbtn .flowbtn__label { margin-right: 30px; }
