@@ -358,14 +358,16 @@ button { font: inherit; cursor: pointer; }
    viewport top (top:0), inset to the hero's sides. Toggled on only while scrolling
    through the hero, so at rest the hero's rounded corners stay clean (no step) and
    when on there is no soft/unblurred sliver at the top (no gap). */
-.topblur { position: fixed; top: 0; left: var(--gap); right: var(--gap); height: 7.5rem; z-index: 40; pointer-events: none; opacity: 0; }
+/* --bf = blur factor (0..1), animated via rAF. We scale the blur radius instead of
+   fading opacity, because opacity<1 on this parent would isolate the group and kill
+   the children's backdrop-filter (that was the "blur doesn't work on scroll" bug). */
+.topblur { position: fixed; top: 0; left: var(--gap); right: var(--gap); height: 7.5rem; z-index: 40; pointer-events: none; --bf: 0; }
 .topblur > div { position: absolute; inset: 0; }
-.topblur > div:nth-child(1) { -webkit-backdrop-filter: blur(0.17rem); backdrop-filter: blur(0.17rem); -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 22%); mask-image: linear-gradient(to top, transparent 0%, #000 22%); }
-.topblur > div:nth-child(2) { -webkit-backdrop-filter: blur(0.33rem); backdrop-filter: blur(0.33rem); -webkit-mask-image: linear-gradient(to top, transparent 30%, #000 50%); mask-image: linear-gradient(to top, transparent 30%, #000 50%); }
-.topblur > div:nth-child(3) { -webkit-backdrop-filter: blur(0.7rem); backdrop-filter: blur(0.7rem); -webkit-mask-image: linear-gradient(to top, transparent 50%, #000 68%); mask-image: linear-gradient(to top, transparent 50%, #000 68%); }
-.topblur > div:nth-child(4) { -webkit-backdrop-filter: blur(1.2rem); backdrop-filter: blur(1.2rem); -webkit-mask-image: linear-gradient(to top, transparent 66%, #000 84%); mask-image: linear-gradient(to top, transparent 66%, #000 84%); }
-.topblur > div:nth-child(5) { -webkit-backdrop-filter: blur(1.8rem); backdrop-filter: blur(1.8rem); -webkit-mask-image: linear-gradient(to top, transparent 82%, #000 96%); mask-image: linear-gradient(to top, transparent 82%, #000 96%); }
-@media (prefers-reduced-motion: reduce) { .topblur { transition: none; } }
+.topblur > div:nth-child(1) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.17rem)); backdrop-filter: blur(calc(var(--bf) * 0.17rem)); -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 22%); mask-image: linear-gradient(to top, transparent 0%, #000 22%); }
+.topblur > div:nth-child(2) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.33rem)); backdrop-filter: blur(calc(var(--bf) * 0.33rem)); -webkit-mask-image: linear-gradient(to top, transparent 30%, #000 50%); mask-image: linear-gradient(to top, transparent 30%, #000 50%); }
+.topblur > div:nth-child(3) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.7rem)); backdrop-filter: blur(calc(var(--bf) * 0.7rem)); -webkit-mask-image: linear-gradient(to top, transparent 50%, #000 68%); mask-image: linear-gradient(to top, transparent 50%, #000 68%); }
+.topblur > div:nth-child(4) { -webkit-backdrop-filter: blur(calc(var(--bf) * 1.2rem)); backdrop-filter: blur(calc(var(--bf) * 1.2rem)); -webkit-mask-image: linear-gradient(to top, transparent 66%, #000 84%); mask-image: linear-gradient(to top, transparent 66%, #000 84%); }
+.topblur > div:nth-child(5) { -webkit-backdrop-filter: blur(calc(var(--bf) * 1.8rem)); backdrop-filter: blur(calc(var(--bf) * 1.8rem)); -webkit-mask-image: linear-gradient(to top, transparent 82%, #000 96%); mask-image: linear-gradient(to top, transparent 82%, #000 96%); }
 
 /* Always-rounded viewport top corners: fixed page-bg concave masks at the top-left/right
    so any section scrolled to the very top still reads as a rounded card (hero + sections). */
