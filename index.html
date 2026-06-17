@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InfraCore — SynthAI-style preview</title>
   <meta name="description" content="InfraCore content in the SynthAI design language (study preview)." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -25,6 +27,11 @@
           <span class="logo__txt"><span style="color:#0b6854;font-weight:700;">Infra</span><span style="color:#23806a;font-weight:600;">Core</span></span>
         </a>
         <nav class="nav">
+          <div class="langsw" role="group" aria-label="Language">
+            <span class="langsw__thumb" aria-hidden="true"></span>
+            <button type="button" class="langsw__btn is-active" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" class="langsw__btn" data-lang="ka" aria-pressed="false">KA</button>
+          </div>
           <a href="#products">Products</a>
           <a href="#services">Services</a>
           <a href="#how">How we work</a>
@@ -167,7 +174,7 @@
           <div class="hstep">
             <span class="hstep__n">01</span>
             <div class="hstep__card">
-              <span class="hstep__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 01-12.4 7.5L3 21l2-5.6A8.5 8.5 0 1121 11.5z"/></svg></span>
+              <span class="hstep__ico"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
               <h4>Consultation</h4>
               <p>We understand your needs and recommend the right equipment.</p>
             </div>
@@ -175,7 +182,7 @@
           <div class="hstep">
             <span class="hstep__n">02</span>
             <div class="hstep__card">
-              <span class="hstep__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5h11v7H3zM14 10h4l3 3v1.5h-7z"/><circle cx="7" cy="17.5" r="1.7"/><circle cx="17.5" cy="17.5" r="1.7"/></svg></span>
+              <span class="hstep__ico"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></span>
               <h4>Delivery &amp; setup</h4>
               <p>We deliver, set up the network, and configure computers and licenses.</p>
             </div>
@@ -183,7 +190,7 @@
           <div class="hstep">
             <span class="hstep__n">03</span>
             <div class="hstep__card">
-              <span class="hstep__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 7.9-7 9-4-1.1-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="hstep__ico"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
               <h4>Warranty &amp; support</h4>
               <p>We stay with you — with official warranty and technical support.</p>
             </div>
@@ -219,27 +226,27 @@
         <!-- Category nodes -->
         <div class="intg__nodes" aria-hidden="true">
           <div class="intg__node intg__node--lt intg__node--teal">
-            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><rect x="5.5" y="5.5" width="9" height="9" rx="1.5"/><path d="M8 2.5v3M12 2.5v3M8 14.5v3M12 14.5v3M2.5 8h3M2.5 12h3M14.5 8h3M14.5 12h3"/></svg></span>
+            <span class="intg__nodeico"><i class="fa-solid fa-desktop" aria-hidden="true"></i></span>
             <span class="intg__nodelabel">Computers</span>
           </div>
           <div class="intg__node intg__node--lm intg__node--green">
-            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><path d="M3 8.2a11 11 0 0114 0"/><path d="M5.6 11a7 7 0 018.8 0"/><path d="M8 13.7a3 3 0 014 0"/><path d="M10 16.4h.01"/></svg></span>
+            <span class="intg__nodeico"><i class="fa-solid fa-wifi" aria-hidden="true"></i></span>
             <span class="intg__nodelabel">Networking</span>
           </div>
           <div class="intg__node intg__node--lb intg__node--mint">
-            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><path d="M4 12v-1.5a6 6 0 0112 0V12"/><rect x="3" y="11.5" width="3.5" height="5" rx="1.5"/><rect x="13.5" y="11.5" width="3.5" height="5" rx="1.5"/></svg></span>
+            <span class="intg__nodeico"><i class="fa-solid fa-headset" aria-hidden="true"></i></span>
             <span class="intg__nodelabel">Headsets · Jabra</span>
           </div>
           <div class="intg__node intg__node--rt intg__node--purple">
-            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><rect x="2.5" y="4" width="15" height="9.5" rx="1.5"/><path d="M7.5 17h5M10 13.5V17"/></svg></span>
+            <span class="intg__nodeico"><i class="fa-solid fa-display" aria-hidden="true"></i></span>
             <span class="intg__nodelabel">Monitors</span>
           </div>
           <div class="intg__node intg__node--rm intg__node--blue">
-            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><path d="M5.5 8V3.5h9V8"/><rect x="3" y="8" width="14" height="6" rx="1.5"/><path d="M5.5 12.5h9V17h-9z"/></svg></span>
+            <span class="intg__nodeico"><i class="fa-solid fa-print" aria-hidden="true"></i></span>
             <span class="intg__nodelabel">Printers</span>
           </div>
           <div class="intg__node intg__node--rb intg__node--pink">
-            <span class="intg__nodeico"><svg viewBox="0 0 20 20"><path d="M7 5.5l-4 4.5 4 4.5M13 5.5l4 4.5-4 4.5"/></svg></span>
+            <span class="intg__nodeico"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
             <span class="intg__nodelabel">Software</span>
           </div>
         </div>
@@ -247,7 +254,7 @@
         <!-- Centre content -->
         <div class="intg__center">
           <span class="eyebrow intg__eyebrow">
-            <svg class="intg__hub" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M9.8 9.8L6.3 6.3M14.2 9.8l3.5-3.5M9.8 14.2l-3.5 3.5M14.2 14.2l3.5 3.5"/></svg>
+            <i class="intg__hub fa-solid fa-circle-nodes" aria-hidden="true"></i>
             Why Infra Core
           </span>
           <h2>One partner wired into your whole office</h2>
@@ -303,13 +310,10 @@
 
         <!-- 3 · DELIVERY & INSTALLATION (dark, wide) — route warehouse → office -->
         <article class="bento__card bento__card--dark bento__delivery">
-          <h3>Delivery &amp; installation</h3>
-          <p class="bento__desc">Fast delivery, setup and full office fit-out — turnkey.</p>
-          <div class="bento__viz route" aria-hidden="true">
-            <svg class="route__svg" viewBox="0 0 480 160" preserveAspectRatio="none"><path class="route__line" d="M40 118 C150 118 150 48 250 48 S360 110 440 70" /></svg>
-            <span class="rnode rnode--start"><svg viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11M4 20h16M9 20v-6h6v6"/></svg></span>
-            <span class="rnode rnode--end"><svg viewBox="0 0 24 24"><path d="M5 21V5a1 1 0 011-1h8a1 1 0 011 1v16M15 9h3a1 1 0 011 1v11M8 8h.01M11 8h.01M8 12h.01M11 12h.01"/></svg></span>
-            <span class="route__truck"><svg viewBox="0 0 32 22"><path d="M2 4h15v12H2zM17 8h6l6 4v4H17z"/><circle cx="8" cy="17" r="2.6"/><circle cx="23.5" cy="17" r="2.6"/></svg></span>
+          <div class="route__map" id="deliveryMap" aria-hidden="true"></div>
+          <div class="bento__delivery-head">
+            <h3>Delivery &amp; installation</h3>
+            <p class="bento__desc">Fast delivery, setup and full office fit-out — turnkey.</p>
           </div>
         </article>
 
@@ -320,7 +324,14 @@
           <div class="bento__viz chat" aria-hidden="true">
             <div class="bubble bubble--in">Which mini PCs suit our new office?</div>
             <div class="bubble bubble--out">
-              <span class="bubble__av"></span>
+              <span class="bubble__av"><svg viewBox="0 0 64 64" aria-hidden="true">
+                <g transform="rotate(0 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#0b6854" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#0b6854"/></g>
+                <g transform="rotate(60 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#bce0d7" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#bce0d7"/></g>
+                <g transform="rotate(120 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#309076" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#309076"/></g>
+                <g transform="rotate(180 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#6eb39f" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#6eb39f"/></g>
+                <g transform="rotate(240 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#0b6854" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#0b6854"/></g>
+                <g transform="rotate(300 32 32)"><path d="M32 25 V14 L24.5 8.5" fill="none" stroke="#6eb39f" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24.5" cy="8.5" r="3" fill="#6eb39f"/></g>
+              </svg></span>
               <span>Beelink SER for the desks + Jabra headsets. I'll send a full quote.</span>
             </div>
             <div class="chat__status"><span class="chat__dot"></span>Support online · replies in minutes</div>
@@ -374,6 +385,115 @@
       <span>Georgia · B2B IT solutions</span>
     </div>
   </footer>
+
+  <!-- QUOTE MODAL -->
+  <dialog class="qm" id="quoteModal" aria-labelledby="qm-title">
+    <button class="qm__x" type="button" data-qm-close aria-label="Close">
+      <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+    </button>
+    <div class="ccard">
+      <!-- LEFT: info -->
+      <aside class="ccard__info">
+        <span class="eyebrow ccard__path">/contact</span>
+        <h2 id="qm-title">Tell us what your office needs</h2>
+        <p class="ccard__lead">Fill in the form and get a quote — we&rsquo;ll get back to you shortly.</p>
+
+        <ul class="ccard__contacts">
+          <li><span class="ccard__ico"><svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg></span><a href="tel:+995591714750">+995 591 71 47 50</a></li>
+          <li><span class="ccard__ico"><svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></span><a href="mailto:info@infracore-consulting.com">info@infracore-consulting.com</a></li>
+          <li><span class="ccard__ico"><svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg></span><span>Tbilisi, Nino Ramishvili St. #2</span></li>
+        </ul>
+
+        <div class="ccard__social">
+          <a class="ccard__sbtn" href="https://wa.me/995591714750" target="_blank" rel="noopener">
+            <svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 438.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.3-5-3.7-10.5-6.5z"/></svg>
+            Message us on WhatsApp
+          </a>
+          <a class="ccard__sbtn" href="https://www.facebook.com/61570747650104" target="_blank" rel="noopener">
+            <svg viewBox="0 0 320 512" fill="currentColor" aria-hidden="true"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+            Message us on Facebook
+          </a>
+          <a class="ccard__sbtn" href="https://www.linkedin.com/company/infra-core/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+
+        <ul class="ccard__badges">
+          <li><svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8l0 378.1C394 378 431.1 230.1 432 141.4L256 66.8z"/></svg>Official warranty</li>
+          <li><svg viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M48 0C21.5 0 0 21.5 0 48L0 368c0 26.5 21.5 48 48 48l16 0c0 53 43 96 96 96s96-43 96-96l128 0c0 53 43 96 96 96s96-43 96-96l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-48 0-32 0-50.7c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7L416 96l0-48c0-26.5-21.5-48-48-48L48 0zM416 160l50.7 0L544 237.3l0 18.7-128 0 0-96zM160 464a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm272-48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0z"/></svg>Fast delivery</li>
+          <li><svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M0 80L0 229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7L48 32C21.5 32 0 53.5 0 80zm112 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>Competitive pricing</li>
+        </ul>
+      </aside>
+
+      <!-- RIGHT: form -->
+      <div class="ccard__formwrap">
+        <form class="qform" id="quoteForm" novalidate>
+          <!-- Web3Forms: paste your access key below -->
+          <input type="hidden" name="access_key" value="a3c2c030-5591-45e7-8354-72eadfff8d83">
+          <input type="hidden" name="subject" value="New quote request — Infra Core website">
+          <input type="hidden" name="from_name" value="Infra Core website">
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <div class="qform__row">
+            <div class="qfield"><label for="qf-name">Name <span>*</span></label><input id="qf-name" name="name" type="text" autocomplete="name" required></div>
+            <div class="qfield"><label for="qf-company">Company</label><input id="qf-company" name="company" type="text" autocomplete="organization"></div>
+          </div>
+          <div class="qform__row">
+            <div class="qfield"><label for="qf-phone">Phone <span>*</span></label><input id="qf-phone" name="phone" type="tel" autocomplete="tel" placeholder="+995 5XX XX XX XX" required></div>
+            <div class="qfield"><label for="qf-email">Email</label><input id="qf-email" name="email" type="email" autocomplete="email"></div>
+          </div>
+          <div class="qform__row">
+            <div class="qfield"><label id="qf-cat-label">Category</label>
+              <div class="ddm">
+                <button type="button" class="ddm__trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="qf-cat-label">
+                  <span class="ddm__value is-placeholder" data-ddm-value>—</span>
+                  <svg class="ddm__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <input type="hidden" name="category" value="">
+                <ul class="ddm__menu" role="listbox" aria-label="Category">
+                  <li class="ddm__item" role="option" data-val="">—</li>
+                  <li class="ddm__item" role="option" data-val="Computers &amp; Mini PCs">Computers &amp; Mini PCs</li>
+                  <li class="ddm__item" role="option" data-val="Monitors &amp; accessories">Monitors &amp; accessories</li>
+                  <li class="ddm__item" role="option" data-val="Networking equipment">Networking equipment</li>
+                  <li class="ddm__item" role="option" data-val="Printers &amp; office hardware">Printers &amp; office hardware</li>
+                  <li class="ddm__item" role="option" data-val="Headsets &amp; audio">Headsets &amp; audio</li>
+                  <li class="ddm__item" role="option" data-val="Software &amp; licensing">Software &amp; licensing</li>
+                  <li class="ddm__item" role="option" data-val="Full office setup">Full office setup</li>
+                  <li class="ddm__item" role="option" data-val="Other">Other</li>
+                </ul>
+              </div>
+            </div>
+            <div class="qfield"><label id="qf-ind-label">Industry / sector</label>
+              <div class="ddm">
+                <button type="button" class="ddm__trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="qf-ind-label">
+                  <span class="ddm__value is-placeholder" data-ddm-value>—</span>
+                  <svg class="ddm__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <input type="hidden" name="industry" value="">
+                <ul class="ddm__menu" role="listbox" aria-label="Industry / sector">
+                  <li class="ddm__item" role="option" data-val="">—</li>
+                  <li class="ddm__item" role="option" data-val="Legal">Legal</li>
+                  <li class="ddm__item" role="option" data-val="Restaurant / food">Restaurant / food</li>
+                  <li class="ddm__item" role="option" data-val="Retail">Retail</li>
+                  <li class="ddm__item" role="option" data-val="Clinic / healthcare">Clinic / healthcare</li>
+                  <li class="ddm__item" role="option" data-val="Education">Education</li>
+                  <li class="ddm__item" role="option" data-val="Finance / banking">Finance / banking</li>
+                  <li class="ddm__item" role="option" data-val="Hospitality">Hospitality</li>
+                  <li class="ddm__item" role="option" data-val="Manufacturing">Manufacturing</li>
+                  <li class="ddm__item" role="option" data-val="__other__">Other…</li>
+                </ul>
+                <input type="text" class="ddm__other" placeholder="Your industry / sector" hidden>
+              </div>
+            </div>
+          </div>
+          <div class="qfield"><label for="qf-msg">Message</label><textarea id="qf-msg" name="message" rows="3" placeholder="How many workstations? What do you need?"></textarea></div>
+          <label class="qconsent"><input type="checkbox" name="consent" required><span>I consent to the processing of my personal data in order to respond to this inquiry.</span></label>
+          <button class="qform__submit" type="submit">Get a quote</button>
+          <p class="qform__done" role="status" hidden>Thanks — we&rsquo;ll get back to you shortly.</p>
+        </form>
+      </div>
+    </div>
+  </dialog>
 
   <script>
     (function () {
@@ -439,6 +559,265 @@
       window.addEventListener('load', function () { layoutRail(); onScroll(); });
     })();
   </script>
+  <script>
+    (function () {
+      var dlg = document.getElementById('quoteModal');
+      if (!dlg) return;
+
+      function openModal() {
+        if (dlg.open) return;
+        dlg.classList.remove('qm--closing');
+        if (typeof dlg.showModal === 'function') dlg.showModal();
+        else dlg.setAttribute('open', '');
+        var sbw = window.innerWidth - document.documentElement.clientWidth;   // scrollbar width
+        document.body.style.overflow = 'hidden';
+        if (sbw > 0) document.body.style.paddingRight = 'calc(var(--gap) + ' + sbw + 'px)';   // no reflow
+        var first = dlg.querySelector('#qf-name');
+        if (first) setTimeout(function () { first.focus(); }, 40);
+      }
+      function finishClose() {
+        dlg.classList.remove('qm--closing');
+        if (dlg.open && typeof dlg.close === 'function') dlg.close();
+        else dlg.removeAttribute('open');
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+      function closeModal() {
+        if (!dlg.open || dlg.classList.contains('qm--closing')) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { finishClose(); return; }
+        dlg.classList.add('qm--closing');           // play the slide-down, then close
+        var done = function (e) {
+          if (e && e.target !== dlg) return;          // ignore bubbled child animations
+          dlg.removeEventListener('animationend', done);
+          finishClose();
+        };
+        dlg.addEventListener('animationend', done);
+        setTimeout(function () { done({ target: dlg }); }, 420);   // safety fallback
+      }
+      /* Esc → close an open dropdown first, otherwise animate the modal down */
+      dlg.addEventListener('cancel', function (e) {
+        e.preventDefault();
+        var openDd = dlg.querySelector('.ddm.is-open');
+        if (openDd) {
+          openDd.classList.remove('is-open');
+          var t = openDd.querySelector('.ddm__trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+          return;
+        }
+        closeModal();
+      });
+
+      /* any "Request a quote" link/button opens the modal */
+      document.querySelectorAll('a, button').forEach(function (el) {
+        if (el.closest('#quoteModal')) return;
+        if (/request a quote/i.test((el.textContent || '').trim())) {
+          el.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+        }
+      });
+
+      dlg.querySelectorAll('[data-qm-close]').forEach(function (b) {
+        b.addEventListener('click', closeModal);
+      });
+      /* click on the backdrop (outside the card) closes */
+      dlg.addEventListener('click', function (e) {
+        var r = dlg.getBoundingClientRect();
+        var inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+        if (!inside) closeModal();
+      });
+      dlg.addEventListener('close', function () { document.body.style.overflow = ''; document.body.style.paddingRight = ''; });
+
+      /* form → Web3Forms (AJAX, so the modal stays + shows inline success) */
+      var form = document.getElementById('quoteForm');
+      if (form) form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        var btn = form.querySelector('.qform__submit');
+        var done = form.querySelector('.qform__done');
+        var label = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data && data.success) {
+              form.querySelectorAll('input, select, textarea').forEach(function (el) { el.disabled = true; });
+              if (done) { done.hidden = false; }
+              if (btn) { btn.textContent = 'Sent ✓'; }
+            } else {
+              throw new Error((data && data.message) || 'Submission failed');
+            }
+          })
+          .catch(function () {
+            if (btn) { btn.disabled = false; btn.textContent = label; }
+            if (done) {
+              done.hidden = false;
+              done.textContent = 'Couldn’t send — please call or email us directly.';
+              done.style.color = '#c0392b';
+            }
+          });
+      });
+    })();
+  </script>
   <script src="assets/pixel-canvas.js" defer></script>
+  <script>
+    /* Custom animated dropdown (listbox) — writes the choice into a hidden input */
+    (function () {
+      document.querySelectorAll('.ddm').forEach(function (ddm) {
+        var trigger = ddm.querySelector('.ddm__trigger');
+        var valueEl = ddm.querySelector('[data-ddm-value]');
+        var input = ddm.querySelector('input[type="hidden"]');
+        var other = ddm.querySelector('.ddm__other');   // optional free-text for "Other…"
+        var items = Array.prototype.slice.call(ddm.querySelectorAll('.ddm__item'));
+        if (!trigger || !input) return;
+
+        function open() { ddm.classList.add('is-open'); trigger.setAttribute('aria-expanded', 'true'); }
+        function close() { ddm.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); }
+
+        trigger.addEventListener('click', function (e) {
+          e.stopPropagation();
+          ddm.classList.contains('is-open') ? close() : open();
+        });
+
+        items.forEach(function (it) {
+          it.addEventListener('click', function () {
+            var v = it.getAttribute('data-val') || '';
+            var isOther = v === '__other__';
+            valueEl.textContent = it.textContent;
+            valueEl.classList.toggle('is-placeholder', v === '');
+            items.forEach(function (x) { x.setAttribute('aria-selected', x === it ? 'true' : 'false'); });
+            if (other) other.hidden = !isOther;
+            input.value = isOther ? (other ? other.value : '') : v;   // "Other" → use typed text
+            close();
+            if (isOther && other) other.focus(); else trigger.focus();
+          });
+        });
+
+        if (other) other.addEventListener('input', function () { input.value = other.value; });
+
+        document.addEventListener('click', function (e) { if (!ddm.contains(e.target)) close(); });
+      });
+    })();
+  </script>
+  <script>
+    /* Language switcher (EN / KA) — toggles active state + <html lang>, persists choice */
+    (function () {
+      var btns = Array.prototype.slice.call(document.querySelectorAll('.langsw__btn'));
+      if (!btns.length) return;
+      var sw = document.querySelector('.langsw');
+      function setLang(lang) {
+        btns.forEach(function (b) {
+          var on = b.getAttribute('data-lang') === lang;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        if (sw) sw.classList.toggle('is-ka', lang === 'ka');   // slides the thumb
+        document.documentElement.lang = lang;
+        try { localStorage.setItem('lang', lang); } catch (e) {}
+      }
+      var saved;
+      try { saved = localStorage.getItem('lang'); } catch (e) {}
+      if (saved === 'en' || saved === 'ka') setLang(saved);
+      function current() { var a = sw && sw.querySelector('.langsw__btn.is-active'); return a ? a.getAttribute('data-lang') : 'en'; }
+      /* click anywhere on the switch flips the language */
+      if (sw) sw.addEventListener('click', function () { setLang(current() === 'ka' ? 'en' : 'ka'); });
+    })();
+  </script>
+  <script defer src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script>
+    /* Delivery card — real street route (MapLibre + OSRM), Tbilisi warehouse → office */
+    window.addEventListener('load', function () {
+      var el = document.getElementById('deliveryMap');
+      if (!el || typeof maplibregl === 'undefined') return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var A = [44.7682, 41.7117];   // warehouse — Nino Ramishvili St, Tbilisi (our HQ)
+      var B = [44.8545, 41.6889];   // delivery destination — Jikia St, Tbilisi
+
+      var map = new maplibregl.Map({
+        container: el,
+        style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+        center: [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2],
+        zoom: 12.4,
+        interactive: false,
+        attributionControl: false
+      });
+
+      map.on('load', function () {
+        var url = 'https://router.project-osrm.org/route/v1/driving/' +
+          A[0] + ',' + A[1] + ';' + B[0] + ',' + B[1] + '?overview=full&geometries=geojson';
+        fetch(url)
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            var c = d && d.routes && d.routes[0] && d.routes[0].geometry && d.routes[0].geometry.coordinates;
+            draw(c && c.length > 1 ? c : [A, B]);
+          })
+          .catch(function () { draw([A, B]); });
+      });
+
+      function lineFeat(c) { return { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: c } }; }
+
+      function marker(cls, icon, lngLat) {
+        var e = document.createElement('div');
+        e.className = cls;
+        e.innerHTML = '<i class="fa-solid ' + icon + '"></i>';
+        return new maplibregl.Marker({ element: e }).setLngLat(lngLat).addTo(map);
+      }
+
+      function draw(coords) {
+        // pending route (red) under the delivered route (green) which grows as the truck moves
+        map.addSource('route', { type: 'geojson', data: lineFeat(coords) });
+        map.addLayer({ id: 'route-pending', type: 'line', source: 'route', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#ffffff', 'line-width': 2.4, 'line-opacity': 0.9 } });
+        map.addSource('route-done', { type: 'geojson', data: lineFeat([coords[0], coords[0]]) });
+        map.addLayer({ id: 'route-done', type: 'line', source: 'route-done', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#34e89e', 'line-width': 3, 'line-opacity': 1 } });
+
+        marker('mk mk--wh', 'fa-warehouse', A);        // warehouse
+        marker('mk mk--dest', 'fa-building', B);   // office (delivery location)
+
+        var bounds = coords.reduce(function (bb, c) { return bb.extend(c); }, new maplibregl.LngLatBounds(coords[0], coords[0]));
+        map.fitBounds(bounds, { padding: { top: 140, bottom: 14, left: 24, right: 24 }, duration: 0, maxZoom: 12 });
+
+        if (reduce) { map.getSource('route-done').setData(lineFeat(coords)); return; }
+        animateDelivery(coords);
+      }
+
+      function animateDelivery(coords) {
+        var elm = document.createElement('div');
+        elm.className = 'route__truckmk';
+        elm.innerHTML = '<i class="fa-solid fa-truck-fast"></i>';
+        var truck = new maplibregl.Marker({ element: elm }).setLngLat(coords[0]).addTo(map);
+        var done = map.getSource('route-done');
+        var N = coords.length;
+
+        // cumulative distance → constant-speed (smooth) motion regardless of segment length
+        var cum = [0];
+        for (var k = 1; k < N; k++) {
+          var a = coords[k - 1], b = coords[k];
+          var s = Math.cos(a[1] * Math.PI / 180);
+          var dx = (b[0] - a[0]) * s, dy = (b[1] - a[1]);
+          cum[k] = cum[k - 1] + Math.sqrt(dx * dx + dy * dy);
+        }
+        var total = cum[N - 1] || 1;
+        var DURATION = 16000;        // ms for the full trip — slow & calm
+        var PAUSE = 0.12;            // fraction of the loop spent resting at the end (delivered)
+        var startTs = null;
+
+        function frame(ts) {
+          if (startTs === null) startTs = ts;
+          var p = ((ts - startTs) % DURATION) / DURATION;        // 0..1 loop
+          var prog = Math.min(1, p / (1 - PAUSE));               // hold full at the end before resetting
+          var d = prog * total;
+          var i = 1;
+          while (i < N && cum[i] < d) i++;
+          var c0 = coords[i - 1], c1 = coords[i] || c0;
+          var span = (cum[i] - cum[i - 1]) || 1;
+          var frac = (d - cum[i - 1]) / span;
+          var head = [c0[0] + (c1[0] - c0[0]) * frac, c0[1] + (c1[1] - c0[1]) * frac];
+          truck.setLngLat(head);
+          var seg = coords.slice(0, i); seg.push(head);
+          done.setData(lineFeat(seg));
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+    });
+  </script>
 </body>
 </html>
