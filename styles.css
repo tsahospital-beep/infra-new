@@ -121,7 +121,7 @@ button { font: inherit; cursor: pointer; }
 /* ---- Section card: white, rounded, floating on the gray page ---- */
 .section {
   background: #f0f0f0;
-  border-radius: 28px;
+  border-radius: var(--r-xl);   /* match the hero frame's corner radius */
   padding-block: clamp(48px, 8vw, 100px);
   margin-bottom: var(--gap);
 }
@@ -283,7 +283,9 @@ button { font: inherit; cursor: pointer; }
     radial-gradient(42% 40% at 62% 100%, rgba(150, 245, 180, 0.24), transparent 72%),
     radial-gradient(55% 28% at 50% -4%, rgba(46, 220, 150, 0.16), transparent 70%);
   filter: blur(14px) saturate(1.05);
-  animation: auroraIn 2s ease-out both, auroraBreath 9s ease-in-out 2s infinite alternate;
+  /* entrance only — the infinite scale "breath" re-rasterized the 14px blur every frame
+     (constant GPU cost even when idle); the static glow looks identical at rest. */
+  animation: auroraIn 2s ease-out both;
 }
 @keyframes auroraIn { from { opacity: 0; transform: scale(1.35); } to { opacity: 1; transform: scale(1); } }
 @keyframes auroraBreath { from { transform: scale(1); } to { transform: scale(1.08); } }
@@ -363,11 +365,12 @@ button { font: inherit; cursor: pointer; }
    the children's backdrop-filter (that was the "blur doesn't work on scroll" bug). */
 .topblur { position: fixed; top: 0; left: var(--gap); right: var(--gap); height: 7.5rem; z-index: 40; pointer-events: none; --bf: 0; }
 .topblur > div { position: absolute; inset: 0; }
-.topblur > div:nth-child(1) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.17rem)); backdrop-filter: blur(calc(var(--bf) * 0.17rem)); -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 22%); mask-image: linear-gradient(to top, transparent 0%, #000 22%); }
-.topblur > div:nth-child(2) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.33rem)); backdrop-filter: blur(calc(var(--bf) * 0.33rem)); -webkit-mask-image: linear-gradient(to top, transparent 30%, #000 50%); mask-image: linear-gradient(to top, transparent 30%, #000 50%); }
-.topblur > div:nth-child(3) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.7rem)); backdrop-filter: blur(calc(var(--bf) * 0.7rem)); -webkit-mask-image: linear-gradient(to top, transparent 50%, #000 68%); mask-image: linear-gradient(to top, transparent 50%, #000 68%); }
-.topblur > div:nth-child(4) { -webkit-backdrop-filter: blur(calc(var(--bf) * 1.2rem)); backdrop-filter: blur(calc(var(--bf) * 1.2rem)); -webkit-mask-image: linear-gradient(to top, transparent 66%, #000 84%); mask-image: linear-gradient(to top, transparent 66%, #000 84%); }
-.topblur > div:nth-child(5) { -webkit-backdrop-filter: blur(calc(var(--bf) * 1.8rem)); backdrop-filter: blur(calc(var(--bf) * 1.8rem)); -webkit-mask-image: linear-gradient(to top, transparent 82%, #000 96%); mask-image: linear-gradient(to top, transparent 82%, #000 96%); }
+/* 3 layers (was 5) with a lower max radius (0.85rem, was 1.8rem): backdrop-filter is
+   the most expensive effect, and it re-samples every scroll frame — fewer/smaller
+   layers is the single biggest scroll-performance win while keeping the graduated look. */
+.topblur > div:nth-child(1) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.2rem)); backdrop-filter: blur(calc(var(--bf) * 0.2rem)); -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 30%); mask-image: linear-gradient(to top, transparent 0%, #000 30%); }
+.topblur > div:nth-child(2) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.48rem)); backdrop-filter: blur(calc(var(--bf) * 0.48rem)); -webkit-mask-image: linear-gradient(to top, transparent 44%, #000 68%); mask-image: linear-gradient(to top, transparent 44%, #000 68%); }
+.topblur > div:nth-child(3) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.85rem)); backdrop-filter: blur(calc(var(--bf) * 0.85rem)); -webkit-mask-image: linear-gradient(to top, transparent 72%, #000 94%); mask-image: linear-gradient(to top, transparent 72%, #000 94%); }
 /* when the blur is effectively off, drop backdrop-filter entirely so no residual haze /
    repaint ghost lingers at the top after scrolling back up */
 .topblur.is-idle > div { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
@@ -525,7 +528,7 @@ button { font: inherit; cursor: pointer; }
     radial-gradient(46% 42% at 80% 104%, rgba(80, 205, 230, 0.20), transparent 72%),
     radial-gradient(40% 38% at 62% 104%, rgba(150, 245, 180, 0.18), transparent 72%);
   filter: blur(16px) saturate(1.05);
-  animation: auroraBreath 9s ease-in-out infinite alternate;
+  /* static — dropped the infinite scale "breath" that re-rasterized this 16px blur each frame */
 }
 @media (prefers-reduced-motion: reduce) { .intg::before { animation: none; } }
 .intg > .container { position: relative; z-index: 2; }
