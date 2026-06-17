@@ -713,7 +713,8 @@ button { font: inherit; cursor: pointer; }
 .bento__support  { grid-column: 5 / 10;  grid-row: 2; }
 .bento__infra    { grid-column: 10 / 13; grid-row: 2; }
 
-/* ---- 1 · intro card (browser mockup + header) ---- */
+/* ---- 1 · intro card (photo + header) ---- */
+.bento__introimg { margin: 16px 16px 0; width: calc(100% - 32px); flex: 1 1 auto; min-height: 150px; object-fit: cover; border-radius: 12px 12px 0 0; display: block; }
 .browser { margin: 16px 16px 0; border-radius: 12px 12px 0 0; overflow: hidden; flex: 1 1 auto; display: flex; flex-direction: column; min-height: 150px; }
 .browser__bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #e9eaee; }
 .browser__bar i { width: 9px; height: 9px; border-radius: 50%; background: #cdd0d6; }
