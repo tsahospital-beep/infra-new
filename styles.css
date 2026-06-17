@@ -465,7 +465,7 @@ button { font: inherit; cursor: pointer; }
 .hstep:nth-of-type(1) .hstep__ico,
 .hstep:nth-of-type(2) .hstep__ico,
 .hstep:nth-of-type(3) .hstep__ico { background: #0b6854; color: #fff; }
-.hstep__ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.hstep__ico i { font-size: 21px; line-height: 1; }
 .hstep__card h4 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.3px; }
 .hstep__card p { margin-top: 8px; color: var(--muted); font-size: 0.96rem; }
 
@@ -544,7 +544,7 @@ button { font: inherit; cursor: pointer; }
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25), 0 8px 22px rgba(0, 0, 0, 0.45);
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
 }
-.intg__nodeico svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.intg__nodeico i { font-size: 24px; line-height: 1; }
 .intg__nodelabel {
   font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.05em;
   text-transform: uppercase; color: var(--n-400);
@@ -562,7 +562,7 @@ button { font: inherit; cursor: pointer; }
 .intg__center { position: relative; z-index: 3; max-width: 30rem; margin: 0 auto; text-align: center; }
 .intg__eyebrow { color: #6eb39f; }
 .intg__eyebrow::before { display: none; }     /* replace the dot with the hub glyph */
-.intg__hub { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.intg__hub { font-size: 13px; line-height: 1; }
 .intg__center h2 { color: #ffffff; font-size: clamp(1.7rem, 3.4vw, 2.6rem); letter-spacing: -1px; line-height: 1.12; margin-top: 16px; }
 .intg__center p { margin-top: 16px; color: var(--n-400); font-size: 1.05rem; line-height: 1.65; }
 .intg__cta { margin-top: 28px; }
@@ -719,11 +719,11 @@ button { font: inherit; cursor: pointer; }
 .route__line { fill: none; stroke: rgba(255,255,255,0.32); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 5 8; vector-effect: non-scaling-stroke; animation: routeFlow 1s linear infinite; }
 @keyframes routeFlow { to { stroke-dashoffset: -13; } }
 .rnode { position: absolute; transform: translate(-50%,-50%); width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.4); }
-.rnode svg { width: 22px; height: 22px; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.rnode--start { left: 8.3%; top: 73.75%; } .rnode--start svg { stroke: #6eb39f; }
-.rnode--end { left: 91.7%; top: 43.75%; } .rnode--end svg { stroke: #84a9f0; }
+.rnode i { font-size: 18px; line-height: 1; }
+.rnode--start { left: 8.3%; top: 73.75%; } .rnode--start i { color: #6eb39f; }
+.rnode--end { left: 91.7%; top: 43.75%; } .rnode--end i { color: #84a9f0; }
 .route__truck { position: absolute; left: 52%; top: 30%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: #0a0a0a; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
-.route__truck svg { width: 26px; height: 18px; fill: none; stroke: #34e89e; stroke-width: 1.5; stroke-linejoin: round; }
+.route__truck i { font-size: 18px; color: #34e89e; line-height: 1; }
 
 /* ---- 4 · support (chat thread) ---- */
 .chat { display: flex; flex-direction: column; gap: 12px; justify-content: center; }
@@ -747,6 +747,85 @@ button { font: inherit; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .seal__ring, .route__line, .stack__sync svg { animation: none; }
 }
+
+/* ============================================================
+   Quote modal (native <dialog>) — contact card
+   ============================================================ */
+.qm {
+  width: min(960px, 94vw);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-xl);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 30px 80px rgba(10, 15, 20, 0.35);
+  overflow: auto;
+}
+.qm::backdrop { background: rgba(10, 12, 14, 0.55); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+.qm[open] { animation: qmIn 0.26s var(--ease); }
+@keyframes qmIn { from { opacity: 0; transform: translateY(10px) scale(0.985); } to { opacity: 1; transform: none; } }
+
+.qm__x {
+  position: absolute; top: 12px; right: 12px; z-index: 5;
+  width: 36px; height: 36px; display: grid; place-items: center;
+  border: 0; border-radius: 50%; background: rgba(0, 0, 0, 0.05); color: var(--n-700); cursor: pointer;
+  transition: background-color var(--t-fast) var(--ease);
+}
+.qm__x:hover { background: rgba(0, 0, 0, 0.1); }
+.qm__x svg { width: 15px; height: 15px; fill: currentColor; }
+
+.ccard { display: grid; grid-template-columns: 0.82fr 1fr; border-radius: inherit; overflow: hidden; }
+
+/* left · info */
+.ccard__info { padding: clamp(22px, 3vw, 36px); }
+.ccard__path { color: #0b6854; }
+.ccard__info h2 { font-size: clamp(1.45rem, 2.6vw, 2.05rem); letter-spacing: -0.5px; line-height: 1.12; margin-top: 12px; }
+.ccard__lead { color: var(--muted); margin-top: 12px; font-size: 0.96rem; line-height: 1.55; max-width: 34ch; }
+.ccard__contacts { margin-top: 22px; }
+.ccard__contacts li { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); font-size: 0.92rem; }
+.ccard__contacts li:first-child { border-top: 0; }
+.ccard__contacts a:hover { color: #0b6854; }
+.ccard__ico { flex: none; display: grid; place-items: center; color: #0b6854; }
+.ccard__ico svg { width: 18px; height: 18px; fill: currentColor; }
+.ccard__social { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.ccard__sbtn { display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px; border: 1px solid var(--n-900); border-radius: var(--r-lg); font-weight: 600; font-size: 0.9rem; transition: background-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease); }
+.ccard__sbtn:hover { background: var(--n-900); color: #fff; }
+.ccard__sbtn svg { width: 18px; height: 18px; flex: none; }
+.ccard__badges { display: flex; flex-wrap: wrap; gap: 12px 18px; margin-top: 22px; }
+.ccard__badges li { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--n-700); }
+.ccard__badges svg { width: 15px; height: 15px; flex: none; fill: #0b6854; }
+
+/* right · form */
+.ccard__formwrap { position: relative; background: var(--n-50); border-left: 1px solid var(--line); padding: clamp(22px, 3vw, 34px); display: flex; align-items: center; }
+.qform { width: 100%; }
+.qform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.qfield { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.qform__row .qfield { margin-bottom: 0; }
+.qfield label { font-size: 0.8rem; font-weight: 600; color: var(--n-700); }
+.qfield label span { color: #c0392b; }
+.qfield input, .qfield select, .qfield textarea {
+  width: 100%; padding: 10px 12px; font: inherit; font-size: 0.92rem; color: var(--ink);
+  background: #fff; border: 1px solid var(--n-300); border-radius: var(--r-lg);
+  transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.qfield textarea { resize: vertical; min-height: 84px; }
+.qfield input:focus, .qfield select:focus, .qfield textarea:focus { outline: none; border-color: #0b6854; box-shadow: 0 0 0 3px rgba(11, 104, 84, 0.15); }
+.qfield input::placeholder, .qfield textarea::placeholder { color: var(--n-400); }
+.qconsent { display: flex; align-items: flex-start; gap: 9px; margin: 4px 0 16px; font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+.qconsent input { margin-top: 2px; width: 16px; height: 16px; accent-color: #0b6854; flex: none; }
+.qform__submit { width: 100%; min-height: 48px; border: 0; border-radius: var(--r-lg); background: #0b6854; color: #fff; font-family: var(--f-mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; cursor: pointer; transition: background-color var(--t-btn) var(--ease); }
+.qform__submit:hover { background: #0d7a62; }
+.qform__submit:disabled { opacity: 0.75; cursor: default; }
+.qform__done { margin-top: 12px; text-align: center; color: #0b6854; font-weight: 600; font-size: 0.9rem; }
+
+@media (max-width: 760px) {
+  .ccard { grid-template-columns: 1fr; }
+  .ccard__formwrap { border-left: 0; border-top: 1px solid var(--line); }
+  .qform__row { grid-template-columns: 1fr; gap: 0; }
+  .qform__row .qfield { margin-bottom: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .qm[open] { animation: none; } }
 
 /* responsive */
 @media (max-width: 980px) {
