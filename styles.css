@@ -316,9 +316,9 @@ button { font: inherit; cursor: pointer; }
 .hero__art {
   position: absolute;
   top: 50%;
-  right: -2%;
+  right: 0;
   transform: translateY(-50%);
-  height: 124%;
+  height: 92%;
   width: auto;
   max-width: none;
   z-index: 0;
