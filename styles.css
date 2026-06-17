@@ -427,6 +427,32 @@ button { font: inherit; cursor: pointer; }
   filter: blur(8px) saturate(1.05);
 }
 .fcard__body, .fcard__art { position: relative; z-index: 1; }
+/* SIGNATURE: 4 thin lines flowing like a river — a current runs DOWN each line (out of the
+   top-right corner toward the bottom, left of centre) and flows off the bottom edge */
+.fcard { --flow-col: #34e89e; }
+.fcard--greenbg { --flow-col: #cdf4e2; }
+.fcard__flow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.fcard__flow .ff-base { stroke: var(--flow-col); stroke-width: 2; opacity: 0.2; }
+.fcard__flow .ff-flow {
+  stroke: var(--flow-col); stroke-width: 2.2;
+  stroke-dasharray: 16 584;   /* one bright pulse per 6 card-lengths → lit ~1/6 of the cycle */
+  filter: drop-shadow(0 0 5px rgba(40, 200, 150, 0.55));
+  animation: ffFlow 12s linear infinite;
+  animation-delay: calc(var(--card-d, 0s) + var(--d, 0s));
+}
+@keyframes ffFlow { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -600; } }
+/* hand the bright pulse from card to card so ONE river flows 1 → 6, then repeats.
+   Negative delays start a loop AHEAD in time, so the order is 0,-10,-8,-6,-4,-2
+   (= phases 0,2,4,6,8,10s) to make the pulse cross card1 first, then 2, 3 … 6. */
+.fcard:nth-child(1) .ff-flow { --card-d: 0s; }
+.fcard:nth-child(2) .ff-flow { --card-d: -10s; }
+.fcard:nth-child(3) .ff-flow { --card-d: -8s; }
+.fcard:nth-child(4) .ff-flow { --card-d: -6s; }
+.fcard:nth-child(5) .ff-flow { --card-d: -4s; }
+.fcard:nth-child(6) .ff-flow { --card-d: -2s; }
+@media (prefers-reduced-motion: reduce) {
+  .fcard__flow .ff-flow { animation: none; stroke-dasharray: none; opacity: 0.4; }
+}
 .fcard:nth-child(1) { top: 80px; z-index: 1; }
 .fcard:nth-child(2) { top: 96px; z-index: 2; }
 .fcard:nth-child(3) { top: 112px; z-index: 3; }
@@ -587,13 +613,8 @@ button { font: inherit; cursor: pointer; }
   text-transform: uppercase; color: var(--n-400);
   white-space: nowrap;
 }
-/* Per-node frosted tint + bright icon colour that reads on black */
-.intg__node--teal   .intg__nodeico { background: rgba(46, 196, 166, 0.16);  color: #6fe0c6; }
-.intg__node--green  .intg__nodeico { background: rgba(76, 199, 158, 0.16);  color: #74dcb2; }
-.intg__node--mint   .intg__nodeico { background: rgba(110, 211, 166, 0.16); color: #8ce5bf; }
-.intg__node--purple .intg__nodeico { background: rgba(169, 155, 255, 0.18); color: #bcb0ff; }
-.intg__node--blue   .intg__nodeico { background: rgba(132, 169, 240, 0.18); color: #9fc1ff; }
-.intg__node--pink   .intg__nodeico { background: rgba(232, 155, 212, 0.18); color: #f0b0e0; }
+/* All node icons share one colour — the brand green of the navbar "Request a quote" button */
+.intg__nodeico { background: #0b6854; color: #fff; }
 
 /* ---- Centre content (light text on black) ---- */
 .intg__center { position: relative; z-index: 3; max-width: 30rem; margin: 0 auto; text-align: center; }
