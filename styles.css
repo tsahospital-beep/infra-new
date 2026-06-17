@@ -975,6 +975,12 @@ button { font: inherit; cursor: pointer; }
   .fcard__art { width: 100%; min-height: 180px; }
   .whyrow { grid-template-columns: 1fr; }
   .hero__grid, .split { grid-template-columns: 1fr; }
+  /* phone: hero hugs its content instead of filling the screen (was 100svh);
+     keep a short bottom band so the render reads below the CTAs, not behind them */
+  .hero { min-height: auto; padding-bottom: 150px; }
+  /* phone: both CTAs on one compact row, side by side */
+  .hero__cta { flex-wrap: nowrap; gap: 10px; margin-top: 24px; }
+  .hero__cta .btn { flex: 1 1 0; min-width: 0; min-height: 44px; padding: 0 10px; font-size: 0.7rem; white-space: nowrap; }
   .hero__visual { display: none; }
   /* phone: render rotated 90deg (points up), full opacity, rising from + bleeding off the bottom */
   .hero__art {
