@@ -1044,8 +1044,16 @@ button { font: inherit; cursor: pointer; }
   /* phone: the island's desktop 24px left padding made the logo jump right when the
      sticky appeared — trim it so the logo holds the same spot in both states (no shift) */
   .site-head.is-scrolled .site-head__bar { padding-left: 8px; }
-  /* phone: sticky header keeps the dark hero-top look (white CTA), not the black/green island */
-  .site-head.is-scrolled .site-head__bar { background: #0a0a0a; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.20); }
+  /* phone: sticky header carries the actual hero render as its background (no darkening),
+     so the hero look "sticks" as the header (white CTA) */
+  .site-head.is-scrolled .site-head__bar {
+    background-color: #0a0a0a;
+    background-image: url(assets/hero-logo3d-m.webp);
+    background-size: 175% auto;
+    background-position: 50% 46%;
+    background-repeat: no-repeat;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.20);
+  }
   .site-head.is-scrolled .flowbtn { background: #fff; color: #111; }
   .site-head.is-scrolled .flowbtn__chip { background: #111; }
   .head__actions .btn--sm { display: none; }
