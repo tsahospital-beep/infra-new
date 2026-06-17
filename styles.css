@@ -310,11 +310,20 @@ button { font: inherit; cursor: pointer; }
 }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 
-/* Hero visual — 3D-rendered InfraCore mark (gentle float + soft glow) */
-.hero__visual { position: relative; aspect-ratio: 1 / 1; display: grid; place-items: center; }
-.hero__visual img { width: 90%; height: auto; object-fit: contain; filter: drop-shadow(0 26px 60px rgba(16, 132, 102, 0.4)); animation: heroFloat 6s ease-in-out infinite; }
-@keyframes heroFloat { 0%, 100% { transform: translateY(-10px); } 50% { transform: translateY(10px); } }
-@media (prefers-reduced-motion: reduce) { .hero__visual img { animation: none; } }
+/* Hero visual — full-bleed 3D logo render, anchored right, spilling off the edge.
+   No glow, no motion: just the static render clipped by the hero's rounded edge. */
+.hero__visual { aspect-ratio: 1 / 1; }
+.hero__art {
+  position: absolute;
+  top: 50%;
+  right: -2%;
+  transform: translateY(-50%);
+  height: 124%;
+  width: auto;
+  max-width: none;
+  z-index: 0;
+  pointer-events: none;
+}
 
 /* ===== Dark top-hero theme (only the hero section) ===== */
 .hero h1 { color: #fff; }
@@ -958,7 +967,8 @@ button { font: inherit; cursor: pointer; }
   .fcard__art { width: 100%; min-height: 180px; }
   .whyrow { grid-template-columns: 1fr; }
   .hero__grid, .split { grid-template-columns: 1fr; }
-  .hero__visual { max-width: 460px; order: -1; margin-inline: auto; width: 100%; }
+  .hero__visual { display: none; }
+  .hero__art { height: 72%; right: -24%; opacity: 0.3; }
   .foot__cols { grid-template-columns: 1fr 1fr; }
 }
 /* Integration: below the width where the wide node-graph fits cleanly,
