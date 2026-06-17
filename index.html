@@ -27,11 +27,6 @@
           <span class="logo__txt"><span style="color:#0b6854;font-weight:700;">Infra</span><span style="color:#23806a;font-weight:600;">Core</span></span>
         </a>
         <nav class="nav">
-          <div class="langsw" role="group" aria-label="Language">
-            <span class="langsw__thumb" aria-hidden="true"></span>
-            <button type="button" class="langsw__btn is-active" data-lang="en" aria-pressed="true">EN</button>
-            <button type="button" class="langsw__btn" data-lang="ka" aria-pressed="false">KA</button>
-          </div>
           <a href="#products">Products</a>
           <a href="#services">Services</a>
           <a href="#how">How we work</a>
@@ -695,30 +690,6 @@
 
         document.addEventListener('click', function (e) { if (!ddm.contains(e.target)) close(); });
       });
-    })();
-  </script>
-  <script>
-    /* Language switcher (EN / KA) — toggles active state + <html lang>, persists choice */
-    (function () {
-      var btns = Array.prototype.slice.call(document.querySelectorAll('.langsw__btn'));
-      if (!btns.length) return;
-      var sw = document.querySelector('.langsw');
-      function setLang(lang) {
-        btns.forEach(function (b) {
-          var on = b.getAttribute('data-lang') === lang;
-          b.classList.toggle('is-active', on);
-          b.setAttribute('aria-pressed', on ? 'true' : 'false');
-        });
-        if (sw) sw.classList.toggle('is-ka', lang === 'ka');   // slides the thumb
-        document.documentElement.lang = lang;
-        try { localStorage.setItem('lang', lang); } catch (e) {}
-      }
-      var saved;
-      try { saved = localStorage.getItem('lang'); } catch (e) {}
-      if (saved === 'en' || saved === 'ka') setLang(saved);
-      function current() { var a = sw && sw.querySelector('.langsw__btn.is-active'); return a ? a.getAttribute('data-lang') : 'en'; }
-      /* click anywhere on the switch flips the language */
-      if (sw) sw.addEventListener('click', function () { setLang(current() === 'ka' ? 'en' : 'ka'); });
     })();
   </script>
   <script defer src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>

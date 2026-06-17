@@ -250,19 +250,6 @@ button { font: inherit; cursor: pointer; }
   transition: background-color 0.2s var(--ease), color 0.5s var(--ease);
 }
 .nav a:hover { background: var(--n-100); color: var(--n-950); }
-/* language switcher (EN / KA) */
-.langsw { position: relative; display: inline-flex; align-items: center; padding: 3px; border-radius: var(--r-pill); cursor: pointer; }
-.langsw__thumb { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: var(--r-pill); background: #0b6854; transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
-.langsw.is-ka .langsw__thumb { transform: translateX(100%); }
-.langsw__btn { position: relative; z-index: 1; flex: 1; min-width: 32px; text-align: center; border: 0; background: transparent; cursor: pointer; padding: 4px 9px; border-radius: var(--r-pill); font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--n-500); transition: color 0.2s var(--ease); }
-.langsw__btn:not(.is-active):hover { color: var(--n-900); }
-.langsw__btn.is-active { color: #fff; }
-@media (min-width: 1181px) {
-  .site-head .langsw__btn { color: rgba(255, 255, 255, 0.55); }
-  .site-head .langsw__btn:not(.is-active):hover { color: #fff; }
-  .site-head .langsw__btn.is-active { color: #fff; }
-}
-@media (prefers-reduced-motion: reduce) { .langsw__thumb { transition: none; } }
 .head__actions { display: flex; align-items: center; gap: 10px; }
 .navtoggle { display: none; width: 44px; height: 44px; border: 0; background: transparent; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
 .navtoggle span { width: 22px; height: 2px; background: var(--n-900); border-radius: 2px; }
