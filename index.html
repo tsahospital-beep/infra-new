@@ -60,7 +60,14 @@
             <a href="#products" class="btn btn--light">Browse products</a>
           </div>
         </div>
-        <div class="hero__visual" aria-hidden="true"><img src="assets/hero-shape.png" alt="" /></div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="herologo">
+            <div class="herologo__tilt">
+              <img class="herologo__img" src="assets/infracore-mark.svg" alt="" />
+              <span class="herologo__shine"></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -538,6 +545,22 @@
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', function () { layoutRail(); onScroll(); });
       window.addEventListener('load', function () { layoutRail(); onScroll(); });
+
+      /* Hero logo — 3D tilt toward the cursor (glass mark) */
+      var hv = document.querySelector('.hero__visual');
+      var tiltEl = document.querySelector('.herologo__tilt');
+      if (hv && tiltEl) {
+        hv.addEventListener('mousemove', function (e) {
+          var r = hv.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          tiltEl.style.setProperty('--ry', (px * 30).toFixed(2) + 'deg');
+          tiltEl.style.setProperty('--rx', (-py * 24).toFixed(2) + 'deg');
+        });
+        hv.addEventListener('mouseleave', function () {
+          tiltEl.style.setProperty('--rx', '0deg'); tiltEl.style.setProperty('--ry', '0deg');
+        });
+      }
     })();
   </script>
   <script>

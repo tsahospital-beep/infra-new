@@ -310,20 +310,23 @@ button { font: inherit; cursor: pointer; }
 }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 
-/* Abstract iridescent hero visual (CSS-only stand-in, no asset) */
-.hero__visual {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  display: grid;
-  place-items: center;
-}
-.hero__visual img {
-  width: 92%; height: 92%; object-fit: contain;
-  filter: drop-shadow(0 24px 64px rgba(90, 160, 255, 0.28));
-  animation: heroFloat 6s ease-in-out infinite;
+/* Hero logo — 3D interactive glass mark: tilts to the cursor, glass shine sweep,
+   pulsing green glow, gentle idle float */
+.hero__visual { position: relative; aspect-ratio: 1 / 1; display: grid; place-items: center; perspective: 1000px; }
+.herologo { position: relative; width: min(440px, 80%); transform-style: preserve-3d; animation: heroFloat 7s ease-in-out infinite; }
+.herologo::before { content: ""; position: absolute; inset: -20%; z-index: 0; background: radial-gradient(closest-side, rgba(16, 132, 102, 0.5), transparent 72%); filter: blur(20px); animation: heroPulse 5s ease-in-out infinite; }
+.herologo__tilt { position: relative; z-index: 1; transform-style: preserve-3d; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.3s ease-out; }
+.herologo__img { display: block; width: 100%; height: auto; filter: drop-shadow(0 16px 36px rgba(11, 104, 84, 0.5)); transform: translateZ(34px); }
+.herologo__shine {
+  position: absolute; inset: 0; pointer-events: none; transform: translateZ(34px);
+  -webkit-mask: url(assets/infracore-mark.svg) center / contain no-repeat; mask: url(assets/infracore-mark.svg) center / contain no-repeat;
+  background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.6) 50%, transparent 62%); background-size: 220% 220%;
+  mix-blend-mode: screen; animation: heroShine 4.5s ease-in-out infinite;
 }
 @keyframes heroFloat { 0%, 100% { transform: translateY(-9px); } 50% { transform: translateY(9px); } }
-@media (prefers-reduced-motion: reduce) { .hero__visual img { animation: none; } }
+@keyframes heroPulse { 0%, 100% { opacity: 0.55; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes heroShine { 0% { background-position: 180% 0; } 60%, 100% { background-position: -80% 0; } }
+@media (prefers-reduced-motion: reduce) { .herologo, .herologo::before, .herologo__shine { animation: none; } }
 
 /* ===== Dark top-hero theme (only the hero section) ===== */
 .hero h1 { color: #fff; }
