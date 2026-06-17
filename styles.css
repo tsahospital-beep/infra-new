@@ -980,9 +980,14 @@ button { font: inherit; cursor: pointer; }
   /* phone: hero hugs its content instead of filling the screen (was 100svh);
      keep a short bottom band so the render reads below the CTAs, not behind them */
   .hero { min-height: auto; padding-bottom: 250px; }
-  /* phone: both CTAs on one compact row, side by side */
-  .hero__cta { flex-wrap: nowrap; gap: 10px; margin-top: 24px; }
-  .hero__cta .btn { flex: 1 1 0; min-width: 0; min-height: 44px; padding: 0 10px; font-size: 0.7rem; white-space: nowrap; }
+  /* phone: center everything and scale hero text down ~20% */
+  .hero__grid > div { text-align: center; }
+  .hero .eyebrow { font-size: 0.64rem; }
+  .hero h1 { font-size: 1.92rem; margin-inline: auto; }
+  .hero__sub { font-size: 0.86rem; margin-inline: auto; }
+  /* phone: both CTAs on one compact row, side by side, centered */
+  .hero__cta { flex-wrap: nowrap; justify-content: center; gap: 10px; margin-top: 24px; }
+  .hero__cta .btn { flex: 1 1 0; min-width: 0; min-height: 42px; padding: 0 10px; font-size: 0.58rem; white-space: nowrap; }
   .hero__visual { display: none; }
   /* phone: use the upright render (no rotation) in its own band at the BOTTOM,
      below the CTAs (no overlap), full opacity, cut off by the bottom edge */
