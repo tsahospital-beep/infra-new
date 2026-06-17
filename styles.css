@@ -1023,6 +1023,10 @@ button { font: inherit; cursor: pointer; }
   /* phone: the island's desktop 24px left padding made the logo jump right when the
      sticky appeared — trim it so the logo holds the same spot in both states (no shift) */
   .site-head.is-scrolled .site-head__bar { padding-left: 8px; }
+  /* phone: sticky header keeps the dark hero-top look (white CTA), not the black/green island */
+  .site-head.is-scrolled .site-head__bar { background: #0a0a0a; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.20); }
+  .site-head.is-scrolled .flowbtn { background: #fff; color: #111; }
+  .site-head.is-scrolled .flowbtn__chip { background: #111; }
   .head__actions .btn--sm { display: none; }
   .head__actions .flowbtn { display: inline-flex; font-size: 0.72rem; padding: 0 11px; min-height: 40px; }
   .head__actions .flowbtn .flowbtn__label { margin-right: 30px; }
