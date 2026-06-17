@@ -28,7 +28,7 @@
   --soft-blue:   #eaf0f7;
 
   /* Roles */
-  --page-bg: var(--n-100);
+  --page-bg: var(--white);
   --ink: var(--n-900);
   --muted: var(--n-500);
   --line: var(--n-200);
@@ -120,12 +120,27 @@ button { font: inherit; cursor: pointer; }
 
 /* ---- Section card: white, rounded, floating on the gray page ---- */
 .section {
-  background: var(--white);
-  border-radius: var(--r-xl);
+  background: #f0f0f0;
+  border-radius: 28px;
   padding-block: clamp(48px, 8vw, 100px);
   margin-bottom: var(--gap);
 }
 .section--flush { padding-block: clamp(20px, 3vw, 40px); }
+
+/* ---- Office "what's included" box (text + checklist, no button) — your original design ---- */
+#included { padding-block: clamp(36px, 4.5vw, 60px); }
+.ctabox { display: flex; flex-direction: column; gap: 28px; }
+.ctabox__main h3 { font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 600; letter-spacing: -0.5px; margin-top: 12px; color: var(--ink); }
+.ctabox__main p { margin-top: 12px; color: var(--muted); font-size: 0.98rem; max-width: 44ch; }
+.ctabox__list { display: flex; flex-direction: column; gap: 13px; }
+.ctabox__list li { display: flex; align-items: center; gap: 13px; font-size: 0.97rem; font-weight: 500; color: var(--ink); }
+.ctabox__ic { display: inline-flex; width: 26px; height: 26px; flex: none; align-items: center; justify-content: center; border-radius: 50%; background: var(--soft-green); color: #0b6854; }
+.ctabox__ic svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+@media (min-width: 820px) {
+  .ctabox { flex-direction: row; align-items: center; justify-content: space-between; gap: 56px; }
+  .ctabox__main { flex: 1 1 52%; }
+  .ctabox__list { flex: 0 0 38%; }
+}
 
 /* ============================================================
    Buttons — pill, near-black primary lighten on hover
