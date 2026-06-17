@@ -61,12 +61,7 @@
           </div>
         </div>
         <div class="hero__visual" aria-hidden="true">
-          <div class="herologo">
-            <div class="herologo__tilt">
-              <img class="herologo__img" src="assets/infracore-mark.svg" alt="" />
-              <span class="herologo__shine"></span>
-            </div>
-          </div>
+          <div class="logo3d"><div class="logo3d__spin"></div></div>
         </div>
       </div>
     </div>
@@ -546,20 +541,28 @@
       window.addEventListener('resize', function () { layoutRail(); onScroll(); });
       window.addEventListener('load', function () { layoutRail(); onScroll(); });
 
-      /* Hero logo — 3D tilt toward the cursor (glass mark) */
-      var hv = document.querySelector('.hero__visual');
-      var tiltEl = document.querySelector('.herologo__tilt');
-      if (hv && tiltEl) {
-        hv.addEventListener('mousemove', function (e) {
-          var r = hv.getBoundingClientRect();
-          var px = (e.clientX - r.left) / r.width - 0.5;
-          var py = (e.clientY - r.top) / r.height - 0.5;
-          tiltEl.style.setProperty('--ry', (px * 30).toFixed(2) + 'deg');
-          tiltEl.style.setProperty('--rx', (-py * 24).toFixed(2) + 'deg');
+      /* Hero logo — build the real 3D extrusion (stacked layers along Z) + cursor parallax */
+      var spin3d = document.querySelector('.logo3d__spin');
+      if (spin3d) {
+        var N3 = 22, depth3 = 30;
+        for (var k3 = 0; k3 < N3; k3++) {
+          var lay = document.createElement('img');
+          lay.src = 'assets/infracore-mark.svg'; lay.alt = '';
+          lay.style.transform = 'translateZ(' + ((k3 / (N3 - 1) - 0.5) * depth3).toFixed(1) + 'px)';
+          lay.style.filter = 'brightness(' + (0.38 + 0.62 * (k3 / (N3 - 1))).toFixed(2) + ')';
+          spin3d.appendChild(lay);
+        }
+      }
+      var hv3 = document.querySelector('.hero__visual');
+      var l3 = document.querySelector('.logo3d');
+      if (hv3 && l3) {
+        hv3.addEventListener('mousemove', function (e) {
+          var r = hv3.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+          l3.style.setProperty('--py', (x * 36).toFixed(1) + 'deg');
+          l3.style.setProperty('--px', (-y * 22).toFixed(1) + 'deg');
         });
-        hv.addEventListener('mouseleave', function () {
-          tiltEl.style.setProperty('--rx', '0deg'); tiltEl.style.setProperty('--ry', '0deg');
-        });
+        hv3.addEventListener('mouseleave', function () { l3.style.setProperty('--px', '0deg'); l3.style.setProperty('--py', '0deg'); });
       }
     })();
   </script>
