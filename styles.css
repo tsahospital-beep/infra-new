@@ -227,6 +227,10 @@ button { font: inherit; cursor: pointer; }
   background: #0a0a0a;
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.26);
 }
+/* scrolled: let the island span the SAME frame as the section cards below (inset by --gap),
+   not the narrower container padding. Top state keeps the container width (aligned to the hero). */
+.site-head > .container { transition: padding 0.5s var(--ease); }
+.site-head.is-scrolled > .container { max-width: none; padding-inline: var(--gap); }
 .logo { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 1.15rem; }
 .logo__dot { width: 26px; height: 26px; border-radius: 8px; background: var(--n-950); display: inline-grid; place-items: center; color: #fff; font-family: var(--f-mono); font-size: 0.9rem; }
 .logo__mark { height: 30px; display: inline-flex; align-items: center; flex: none; }
