@@ -330,6 +330,8 @@ button { font: inherit; cursor: pointer; }
   z-index: 0;
   pointer-events: none;
 }
+/* phone-only hero render (upright, not rotated) — hidden on desktop */
+.hero__artm { display: none; }
 
 /* ===== Dark top-hero theme (only the hero section) ===== */
 .hero h1 { color: #fff; }
@@ -977,17 +979,19 @@ button { font: inherit; cursor: pointer; }
   .hero__grid, .split { grid-template-columns: 1fr; }
   /* phone: hero hugs its content instead of filling the screen (was 100svh);
      keep a short bottom band so the render reads below the CTAs, not behind them */
-  .hero { min-height: auto; padding-bottom: 150px; }
+  .hero { min-height: auto; padding-bottom: 250px; }
   /* phone: both CTAs on one compact row, side by side */
   .hero__cta { flex-wrap: nowrap; gap: 10px; margin-top: 24px; }
   .hero__cta .btn { flex: 1 1 0; min-width: 0; min-height: 44px; padding: 0 10px; font-size: 0.7rem; white-space: nowrap; }
   .hero__visual { display: none; }
-  /* phone: render rotated 90deg (points up), full opacity, rising from + bleeding off the bottom */
-  .hero__art {
-    top: auto; right: auto; bottom: 0; left: 50%;
-    width: 150%; height: auto; max-width: none; opacity: 1;
-    transform: translate(-50%, 20%) rotate(90deg);
-    transform-origin: center center;
+  /* phone: use the upright render (no rotation) in its own band at the BOTTOM,
+     below the CTAs (no overlap), full opacity, cut off by the bottom edge */
+  .hero__art { display: none; }
+  .hero__artm {
+    display: block; position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 128%; height: auto; max-width: none; opacity: 1;
+    z-index: 0; pointer-events: none;
   }
   .foot__cols { grid-template-columns: 1fr 1fr; }
 }
