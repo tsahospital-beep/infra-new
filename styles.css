@@ -351,6 +351,29 @@ button { font: inherit; cursor: pointer; }
   .site-head .navtoggle span { background: #fff; }
 }
 
+/* GradualBlur (React Bits) reimplemented in vanilla CSS — progressive blur behind
+   the sticky header, over the dark hero. Stacked backdrop-filter layers with
+   gradient masks (blur strongest at the very top). Hidden once the header islands. */
+/* Hard-top progressive blur: strong at the very top edge, fading down. Sits at the
+   viewport top (top:0), inset to the hero's sides. Toggled on only while scrolling
+   through the hero, so at rest the hero's rounded corners stay clean (no step) and
+   when on there is no soft/unblurred sliver at the top (no gap). */
+.topblur { position: fixed; top: 0; left: var(--gap); right: var(--gap); height: 7.5rem; z-index: 40; pointer-events: none; opacity: 0; }
+.topblur > div { position: absolute; inset: 0; }
+.topblur > div:nth-child(1) { -webkit-backdrop-filter: blur(0.17rem); backdrop-filter: blur(0.17rem); -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 22%); mask-image: linear-gradient(to top, transparent 0%, #000 22%); }
+.topblur > div:nth-child(2) { -webkit-backdrop-filter: blur(0.33rem); backdrop-filter: blur(0.33rem); -webkit-mask-image: linear-gradient(to top, transparent 30%, #000 50%); mask-image: linear-gradient(to top, transparent 30%, #000 50%); }
+.topblur > div:nth-child(3) { -webkit-backdrop-filter: blur(0.7rem); backdrop-filter: blur(0.7rem); -webkit-mask-image: linear-gradient(to top, transparent 50%, #000 68%); mask-image: linear-gradient(to top, transparent 50%, #000 68%); }
+.topblur > div:nth-child(4) { -webkit-backdrop-filter: blur(1.2rem); backdrop-filter: blur(1.2rem); -webkit-mask-image: linear-gradient(to top, transparent 66%, #000 84%); mask-image: linear-gradient(to top, transparent 66%, #000 84%); }
+.topblur > div:nth-child(5) { -webkit-backdrop-filter: blur(1.8rem); backdrop-filter: blur(1.8rem); -webkit-mask-image: linear-gradient(to top, transparent 82%, #000 96%); mask-image: linear-gradient(to top, transparent 82%, #000 96%); }
+@media (prefers-reduced-motion: reduce) { .topblur { transition: none; } }
+
+/* Always-rounded viewport top corners: fixed page-bg concave masks at the top-left/right
+   so any section scrolled to the very top still reads as a rounded card (hero + sections). */
+.topframe { position: fixed; top: 0; left: 0; right: 0; height: var(--gap); background: var(--page-bg); z-index: 44; pointer-events: none; }
+.vpcorner { position: fixed; top: var(--gap); z-index: 45; width: var(--r-xl); height: var(--r-xl); pointer-events: none; }
+.vpcorner--l { left: var(--gap); background: radial-gradient(circle at bottom right, transparent var(--r-xl), var(--page-bg) calc(var(--r-xl) + 0.5px)); }
+.vpcorner--r { right: var(--gap); background: radial-gradient(circle at bottom left, transparent var(--r-xl), var(--page-bg) calc(var(--r-xl) + 0.5px)); }
+
 /* ---- Stat band ---- */
 .stats { display: flex; flex-wrap: wrap; gap: clamp(24px, 6vw, 80px); align-items: center; justify-content: center; }
 .stat { text-align: center; }
