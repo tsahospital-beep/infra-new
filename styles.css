@@ -368,6 +368,9 @@ button { font: inherit; cursor: pointer; }
 .topblur > div:nth-child(3) { -webkit-backdrop-filter: blur(calc(var(--bf) * 0.7rem)); backdrop-filter: blur(calc(var(--bf) * 0.7rem)); -webkit-mask-image: linear-gradient(to top, transparent 50%, #000 68%); mask-image: linear-gradient(to top, transparent 50%, #000 68%); }
 .topblur > div:nth-child(4) { -webkit-backdrop-filter: blur(calc(var(--bf) * 1.2rem)); backdrop-filter: blur(calc(var(--bf) * 1.2rem)); -webkit-mask-image: linear-gradient(to top, transparent 66%, #000 84%); mask-image: linear-gradient(to top, transparent 66%, #000 84%); }
 .topblur > div:nth-child(5) { -webkit-backdrop-filter: blur(calc(var(--bf) * 1.8rem)); backdrop-filter: blur(calc(var(--bf) * 1.8rem)); -webkit-mask-image: linear-gradient(to top, transparent 82%, #000 96%); mask-image: linear-gradient(to top, transparent 82%, #000 96%); }
+/* when the blur is effectively off, drop backdrop-filter entirely so no residual haze /
+   repaint ghost lingers at the top after scrolling back up */
+.topblur.is-idle > div { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
 
 /* Always-rounded viewport top corners: fixed page-bg concave masks at the top-left/right
    so any section scrolled to the very top still reads as a rounded card (hero + sections). */

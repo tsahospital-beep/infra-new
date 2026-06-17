@@ -501,7 +501,7 @@
       function stepBlur() {
         blurCur += (blurTarget - blurCur) * 0.14;        // ease current opacity toward target
         if (Math.abs(blurTarget - blurCur) < 0.004) blurCur = blurTarget;
-        if (topblur) topblur.style.setProperty('--bf', blurCur.toFixed(3));
+        if (topblur) { topblur.style.setProperty('--bf', blurCur.toFixed(3)); topblur.classList.toggle('is-idle', blurCur < 0.02); }
         if (blurCur !== blurTarget) { requestAnimationFrame(stepBlur); } else { blurRAF = false; }
       }
       var rail = steps && steps.querySelector('.howsteps__rail');
