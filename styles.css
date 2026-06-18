@@ -432,9 +432,6 @@ button { font: inherit; cursor: pointer; }
 .fcard { --flow-col: #34e89e; }
 .fcard--greenbg { --flow-col: #cdf4e2; }
 .fcard__flow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-/* The flow waves are drawn for wide desktop cards; once the card narrows (tablet/phone)
-   the wide shape squishes into vertical streaks, so hide them <=1024px. Wide desktop keeps them. */
-@media (max-width: 1024px) { .fcard__flow { display: none; } }
 .fcard__flow .ff-base { stroke: var(--flow-col); stroke-width: 2; opacity: 0.2; }
 .fcard__flow .ff-flow {
   stroke: var(--flow-col); stroke-width: 2.2;
@@ -804,7 +801,9 @@ button { font: inherit; cursor: pointer; }
 .bubble--in { align-self: flex-start; background: var(--n-100); color: var(--n-700); border-bottom-left-radius: 5px; }
 .bubble--out { align-self: flex-end; display: flex; align-items: flex-start; gap: 9px; background: linear-gradient(135deg, #0f9b6e, #0b6854); color: #fff; border-bottom-right-radius: 5px; }
 .bubble__av { width: 24px; height: 24px; flex: none; display: grid; place-items: center; }
-.bubble__av img { width: 23px; height: 23px; object-fit: contain; filter: brightness(0) invert(1); }
+.bubble__av svg { width: 23px; height: 23px; }
+.bubble__av svg path { stroke: #fff; }
+.bubble__av svg circle { fill: #fff; }
 .chat__status { display: flex; align-items: center; gap: 8px; margin-top: 2px; color: var(--n-500); font-size: 0.78rem; }
 .chat__dot { width: 8px; height: 8px; border-radius: 50%; background: #19b886; box-shadow: 0 0 0 4px rgba(25,184,134,0.15); }
 
@@ -1001,7 +1000,7 @@ button { font: inherit; cursor: pointer; }
   .hero__grid, .split { grid-template-columns: 1fr; }
   /* phone: hero hugs its content instead of filling the screen (was 100svh);
      keep a short bottom band so the render reads below the CTAs, not behind them */
-  .hero { min-height: auto; padding-bottom: 250px; }
+  .hero { min-height: auto; padding-bottom: clamp(32px, 7vw, 48px); }
   /* phone: center everything and scale hero text down ~20% */
   .hero__grid > div { text-align: center; }
   .hero .eyebrow { font-size: 0.64rem; }
@@ -1014,11 +1013,17 @@ button { font: inherit; cursor: pointer; }
   /* phone: use the upright render (no rotation) in its own band at the BOTTOM,
      below the CTAs (no overlap), full opacity, cut off by the bottom edge */
   .hero__art { display: none; }
+  /* phone: the REAL hero render is pinned as a thin band at the very top (the header zone),
+     so the hero itself "stays" as the header; content scrolls under it. Matches the bar box
+     (top 12, sides 12, height 56, radius 12). */
   .hero__artm {
-    display: block; position: absolute;
-    bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 128%; height: auto; max-width: none; opacity: 1;
-    z-index: 0; pointer-events: none;
+    display: block; position: fixed;
+    top: 12px; left: 12px; right: auto;
+    width: calc(100% - 24px); height: 56px; max-width: none;
+    object-fit: cover; object-position: 50% 52%;
+    background: #0a0a0a; border-radius: 12px;
+    opacity: 1; pointer-events: none;
+    z-index: 46; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
   }
   .foot__cols { grid-template-columns: 1fr 1fr; }
 }
@@ -1045,16 +1050,8 @@ button { font: inherit; cursor: pointer; }
   /* phone: the island's desktop 24px left padding made the logo jump right when the
      sticky appeared — trim it so the logo holds the same spot in both states (no shift) */
   .site-head.is-scrolled .site-head__bar { padding-left: 8px; }
-  /* phone: sticky header carries the actual hero render as its background (no darkening),
-     so the hero look "sticks" as the header (white CTA) */
-  .site-head.is-scrolled .site-head__bar {
-    background-color: #0a0a0a;
-    background-image: url(assets/hero-logo3d-m.webp);
-    background-size: 175% auto;
-    background-position: 50% 46%;
-    background-repeat: no-repeat;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.20);
-  }
+  /* phone: header bar stays transparent — the real pinned hero render band (.hero__artm) shows behind it */
+  .site-head.is-scrolled .site-head__bar { background: transparent; box-shadow: none; }
   .site-head.is-scrolled .flowbtn { background: #fff; color: #111; }
   .site-head.is-scrolled .flowbtn__chip { background: #111; }
   .head__actions .btn--sm { display: none; }
