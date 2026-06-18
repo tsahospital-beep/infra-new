@@ -1000,7 +1000,7 @@ button { font: inherit; cursor: pointer; }
   .hero__grid, .split { grid-template-columns: 1fr; }
   /* phone: hero hugs its content instead of filling the screen (was 100svh);
      keep a short bottom band so the render reads below the CTAs, not behind them */
-  .hero { min-height: auto; padding-bottom: clamp(32px, 7vw, 48px); }
+  .hero { min-height: auto; padding-bottom: 250px; }
   /* phone: center everything and scale hero text down ~20% */
   .hero__grid > div { text-align: center; }
   .hero .eyebrow { font-size: 0.64rem; }
@@ -1013,17 +1013,12 @@ button { font: inherit; cursor: pointer; }
   /* phone: use the upright render (no rotation) in its own band at the BOTTOM,
      below the CTAs (no overlap), full opacity, cut off by the bottom edge */
   .hero__art { display: none; }
-  /* phone: the REAL hero render is pinned as a thin band at the very top (the header zone),
-     so the hero itself "stays" as the header; content scrolls under it. Matches the bar box
-     (top 12, sides 12, height 56, radius 12). */
+  /* phone: render sits in its own band at the BOTTOM of the hero (below the CTAs), upright */
   .hero__artm {
-    display: block; position: fixed;
-    top: 12px; left: 12px; right: auto;
-    width: calc(100% - 24px); height: 56px; max-width: none;
-    object-fit: cover; object-position: 50% 52%;
-    background: #0a0a0a; border-radius: 12px;
-    opacity: 1; pointer-events: none;
-    z-index: 46; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    display: block; position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 128%; height: auto; max-width: none; opacity: 1;
+    z-index: 0; pointer-events: none;
   }
   .foot__cols { grid-template-columns: 1fr 1fr; }
 }
@@ -1050,8 +1045,8 @@ button { font: inherit; cursor: pointer; }
   /* phone: the island's desktop 24px left padding made the logo jump right when the
      sticky appeared — trim it so the logo holds the same spot in both states (no shift) */
   .site-head.is-scrolled .site-head__bar { padding-left: 8px; }
-  /* phone: header bar stays transparent — the real pinned hero render band (.hero__artm) shows behind it */
-  .site-head.is-scrolled .site-head__bar { background: transparent; box-shadow: none; }
+  /* phone: sticky header is a plain dark bar with a white CTA */
+  .site-head.is-scrolled .site-head__bar { background: #0a0a0a; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.20); }
   .site-head.is-scrolled .flowbtn { background: #fff; color: #111; }
   .site-head.is-scrolled .flowbtn__chip { background: #111; }
   .head__actions .btn--sm { display: none; }
