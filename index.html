@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ka" data-lang="ka">
+<html lang="en" data-lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,9 @@
   <meta name="description" content="Infra Core — კომპიუტერები, ქსელი, პრინტერები, Jabra ყურსასმენები და პროგრამული უზრუნველყოფა ბიზნესისთვის. სწრაფი მიწოდება, მონტაჟი, ოფიციალური გარანტია." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=18" />
+  <link rel="stylesheet" href="styles.css?v=19" />
+  <script>document.documentElement.classList.add('i18n-pending')</script>
+  <style>html.i18n-pending body{visibility:hidden}</style>
 </head>
 <body>
 
@@ -955,32 +957,53 @@
   </script>
 
   <script>
-    /* Language switcher: toggles html[data-lang] EN <-> KA + a click spin.
-       (Text translations get wired in later.) */
+    /* Language switcher: English default; the globe button really switches the whole page EN <-> KA. */
     (function () {
+      var PAIRS = [["Products", "პროდუქტები"], ["Services", "სერვისები"], ["How we work", "როგორ ვმუშაობთ"], ["Why us", "რატომ ჩვენ"], ["Contact", "კონტაქტი"], ["Request a quote", "მოითხოვე შეთავაზება"], ["Complete IT solutions for business", "სრული IT გადაწყვეტილებები ბიზნესისთვის"], ["Everything your office runs on — supplied, set up, and supported.", "ყველაფერი, რაზეც თქვენი ოფისი მუშაობს — მოწოდება, დაყენება და მხარდაჭერა."], ["Computers, networking, printers, Jabra headsets and software — with fast delivery, installation, and an official warranty.", "კომპიუტერები, ქსელი, პრინტერები, Jabra ყურსასმენები და პროგრამული უზრუნველყოფა — სწრაფი მიწოდებით, მონტაჟით და ოფიციალური გარანტიით."], ["Browse products", "ნახე პროდუქტები"], ["Office setup", "ოფისის აღჭურვა"], ["All in one place — turnkey delivery", "ერთ სივრცეში — გასაღების ჩაბარებამდე"], ["One supplier equips the whole office — with official warranty, fast delivery and competitive pricing.", "ერთი მომწოდებელი აღჭურავს მთელ ოფისს — ოფიციალური გარანტიით, სწრაფი მიწოდებითა და კონკურენტული ფასებით."], ["Workstations & Mini PC", "სამუშაო სადგურები / Mini PC"], ["Network · Wi-Fi · switches", "ქსელი · Wi-Fi · სვიჩები"], ["Printers · peripherals", "პრინტერები · პერიფერია"], ["Software · licensing", "პროგრამები · ლიცენზიები"], ["Jabra headsets", "Jabra ყურსასმენები"], ["What we supply", "რას ვაწვდით"], ["Everything your office needs — in one place, with official warranty.", "ყველაფერი, რაც თქვენს ოფისს სჭირდება — ერთ ადგილას, ოფიციალური გარანტიით."], ["Computers & Mini PCs", "კომპიუტერები და Mini PC"], ["Monitors & accessories", "მონიტორები და აქსესუარები"], ["Networking equipment", "ქსელის აღჭურვილობა"], ["Printers & office hardware", "პრინტერები და საოფისე ტექნიკა"], ["Headsets & audio — Jabra", "ყურსასმენები და აუდიო — Jabra"], ["Software & licensing", "პროგრამები და ლიცენზიები"], ["PCs, Mini PCs, workstations and all-in-ones — including Beelink.", "PC-ები, Mini PC, სამუშაო სადგურები და All-in-One კომპიუტერები — მათ შორის Beelink."], ["Monitors and accessories for the office.", "მონიტორები და აქსესუარები ოფისისთვის."], ["Switches, routers and Wi-Fi solutions.", "სვიჩები, როუტერები და Wi-Fi გადაწყვეტილებები."], ["Printers, MFPs, scanners and office hardware.", "პრინტერები, MFP, სკანერები და საოფისე ტექნიკა."], ["Jabra headsets and other headphones for office and call-center.", "Jabra ყურსასმენები და სხვა ყურსასმენები ოფისისა და call-center-ისთვის."], ["Software and licensing for business.", "პროგრამული უზრუნველყოფა და ლიცენზირება ბიზნესისთვის."], ["Computers", "კომპიუტერები"], ["Computing", "კომპიუტერები"], ["Displays", "ეკრანები"], ["Networking", "ქსელი"], ["Network", "ქსელი"], ["Print", "ბეჭდვა"], ["Audio", "აუდიო"], ["Software", "პროგრამები"], ["Monitors", "მონიტორები"], ["Printers", "პრინტერები"], ["Headsets · Jabra", "ყურსასმენები · Jabra"], ["From empty office to fully equipped — in three steps", "ცარიელი ოფისიდან სრულად აღჭურვილამდე — სამ ნაბიჯში"], ["From consultation to deployment and warranty — one supplier handles the whole office.", "კონსულტაციიდან მონტაჟამდე და გარანტიამდე — ერთი მომწოდებელი უვლის მთელ ოფისს."], ["Consultation", "კონსულტაცია"], ["We understand your needs and recommend the right equipment.", "გავიგებთ თქვენს საჭიროებებს და შემოგთავაზებთ სწორ აღჭურვილობას."], ["Delivery & setup", "მიწოდება და დაყენება"], ["We deliver, set up the network, and configure computers and licenses.", "ვაწვდით, ვაყენებთ ქსელს, ვაკონფიგურირებთ კომპიუტერებსა და ლიცენზიებს."], ["Warranty & support", "გარანტია და მხარდაჭერა"], ["We stay with you — with official warranty and technical support.", "ვრჩებით თქვენთან — ოფიციალური გარანტიითა და ტექნიკური მხარდაჭერით."], ["Why Infra Core", "რატომ Infra Core"], ["One partner wired into your whole office", "ერთი პარტნიორი მთელი თქვენი ოფისისთვის"], ["Hardware, networking, licensing and accessories — all from one supplier. From consultation to deployment and warranty, it’s handled in one place.", "ტექნიკა, ქსელი, ლიცენზიები და აქსესუარები — ყველაფერი ერთი მომწოდებლისგან. კონსულტაციიდან მონტაჟამდე და გარანტიამდე — ყველაფერი ერთ ადგილას."], ["More than just hardware", "მეტი, ვიდრე უბრალოდ ტექნიკა"], ["We supply, set up and look after your IT — so you can focus on your business.", "ვაწვდით, ვაყენებთ და ვუვლით თქვენს IT-ს — რომ თქვენ თქვენი ბიზნესით იყოთ დაკავებული."], ["Official warranty", "ოფიციალური გარანტია"], ["Official warranty on all equipment.", "ოფიციალური გარანტია მთელ აღჭურვილობაზე."], ["Warranty active", "გარანტია აქტიურია"], ["All equipment · official", "ყველა აღჭურვილობა · ოფიციალური"], ["Delivery & installation", "მიწოდება და მონტაჟი"], ["Delivery & deployment", "მიწოდება და მონტაჟი"], ["Fast delivery, setup and full office fit-out — turnkey.", "სწრაფი მიწოდება, დაყენება და ოფისის სრული აღჭურვა — გასაღების ჩაბარებამდე."], ["Consultation & support", "კონსულტაცია და მხარდაჭერა"], ["Professional consultation to help you choose, plus technical support.", "პროფესიონალური კონსულტაცია სწორი არჩევანისთვის და ტექნიკური მხარდაჭერა."], ["Which mini PCs suit our new office?", "რომელი mini PC შეეფერება ჩვენს ახალ ოფისს?"], ["Beelink SER for the desks + Jabra headsets. I'll send a full quote.", "Beelink SER სამუშაო მაგიდებისთვის + Jabra ყურსასმენები. გამოგიგზავნით სრულ შეთავაზებას."], ["Support online · replies in minutes", "მხარდაჭერა ხაზზეა · პასუხი წუთებში"], ["IT infrastructure", "IT ინფრასტრუქტურა"], ["Backups, network modernization and preventive maintenance — prevention is cheaper than recovery.", "სარეზერვო ასლები, ქსელის მოდერნიზაცია და პროფილაქტიკა — პრევენცია უფრო იაფია, ვიდრე აღდგენა."], ["Backups synced", "სარეზერვო ასლები სინქრონიზებულია"], ["Get started", "დავიწყოთ"], ["Ready to equip your office?", "მზად ხართ ოფისის აღსაჭურვად?"], ["One supplier for the whole office — hardware, networking, licensing and support.", "ერთი მომწოდებელი მთელი ოფისისთვის — ტექნიკა, ქსელი, ლიცენზიები და მხარდაჭერა."], ["Tbilisi, Nino Ramishvili St. #2", "თბილისი, ნინო რამიშვილის ქ. №2"], ["Privacy", "კონფიდენციალურობა"], ["© 2026 Infra Core LTD · ID 405842824 · All rights reserved.", "© 2026 Infra Core LTD · ს/კ 405842824 · ყველა უფლება დაცულია."], ["Georgia · B2B IT solutions", "საქართველო · B2B IT გადაწყვეტილებები"], ["Tell us what your office needs", "გვითხარით, რა სჭირდება თქვენს ოფისს"], ["Fill in the form and get a quote — we’ll get back to you shortly.", "შეავსეთ ფორმა და მიიღეთ შეთავაზება — დაგიკავშირდებით უმოკლეს დროში."], ["Message us on WhatsApp", "მოგვწერეთ WhatsApp-ში"], ["Message us on Facebook", "მოგვწერეთ Facebook-ზე"], ["Connect on LinkedIn", "დაგვიკავშირდით LinkedIn-ზე"], ["Fast delivery", "სწრაფი მიწოდება"], ["Competitive pricing", "კონკურენტული ფასები"], ["Name", "სახელი"], ["Company", "კომპანია"], ["Phone", "ტელეფონი"], ["Email", "ელ. ფოსტა"], ["Category", "კატეგორია"], ["Industry / sector", "საქმიანობის სფერო"], ["Message", "შეტყობინება"], ["Headsets & audio", "ყურსასმენები და აუდიო"], ["Full office setup", "ოფისის სრული აღჭურვა"], ["Other", "სხვა"], ["Other…", "სხვა…"], ["Legal", "იურიდიული"], ["Restaurant / food", "რესტორანი / კვება"], ["Retail", "ვაჭრობა"], ["Clinic / healthcare", "კლინიკა / ჯანდაცვა"], ["Education", "განათლება"], ["Finance / banking", "ფინანსები / საბანკო"], ["Hospitality", "სტუმართმასპინძლობა"], ["Manufacturing", "წარმოება"], ["I consent to the processing of my personal data in order to respond to this inquiry.", "თანახმა ვარ, ჩემი პერსონალური მონაცემები დამუშავდეს ამ მოთხოვნაზე პასუხის გასაცემად."], ["Get a quote", "მიიღე შეთავაზება"], ["Thanks — we’ll get back to you shortly.", "მადლობა! თქვენი მოთხოვნა მიღებულია — დაგიკავშირდებით მალე."], ["How many workstations? What do you need?", "რამდენი სამუშაო ადგილი? რა გჭირდებათ?"], ["Your industry / sector", "თქვენი საქმიანობის სფერო"], ["Close", "დახურვა"], ["Menu", "მენიუ"]];
+      var EN2KA = {}, KA2EN = {};
+      for (var i = 0; i < PAIRS.length; i++) {
+        var e = PAIRS[i][0], k = PAIRS[i][1];
+        if (!(e in EN2KA)) EN2KA[e] = k;
+        if (!(k in KA2EN)) KA2EN[k] = e;
+      }
+      var ATTRS = ['placeholder', 'aria-label'];
+      function conv(s, m) { if (s == null) return null; var k = s.trim(); if (!k) return null; var v = m[k]; return v === undefined ? null : s.replace(k, v); }
+      function walk(n, m) {
+        if (n.nodeType === 3) { var r = conv(n.nodeValue, m); if (r !== null) n.nodeValue = r; return; }
+        if (n.nodeType !== 1) return;
+        var t = n.tagName; if (t === 'SCRIPT' || t === 'STYLE') return;
+        for (var i = 0; i < ATTRS.length; i++) { if (n.hasAttribute(ATTRS[i])) { var r = conv(n.getAttribute(ATTRS[i]), m); if (r !== null) n.setAttribute(ATTRS[i], r); } }
+        for (var c = n.firstChild; c; c = c.nextSibling) walk(c, m);
+      }
+      var applied = 'ka';                 /* page source markup is Georgian */
+      function translate(l) { if (l === applied) return; walk(document.body, l === 'en' ? KA2EN : EN2KA); applied = l; }
+
       var btn = document.querySelector('[data-lang-toggle]');
-      if (!btn) return;
-      var lbl = btn.querySelector('.langsw__lbl');
+      var lbl = btn && btn.querySelector('.langsw__lbl');
       var L = { en: 'EN', ka: 'KA' };
       var lang = document.documentElement.getAttribute('data-lang') || 'en';
-      var hover = false;
-      var suppressHover = false;        /* after a click, show the CURRENT lang until the mouse re-enters */
+      var hover = false, suppressHover = false;
       function other(l) { return l === 'en' ? 'ka' : 'en'; }
       function render() { if (lbl) lbl.textContent = (hover && !suppressHover) ? L[other(lang)] : L[lang]; }
-      function setLang(l) { lang = l; document.documentElement.setAttribute('data-lang', l); render(); }
-      setLang(lang);
-      btn.addEventListener('mouseenter', function () { hover = true; suppressHover = false; render(); });
-      btn.addEventListener('mouseleave', function () { hover = false; suppressHover = false; render(); });
-      btn.addEventListener('click', function () {
-        suppressHover = true;                         /* just switched: show what we switched TO, not the target */
-        setLang(other(lang));                         /* swap text instantly — no text animation on click */
-        btn.classList.remove('is-switching');
-        void btn.offsetWidth;          /* restart the spin */
-        btn.classList.add('is-switching');
-      });
-      btn.addEventListener('animationend', function (e) {
-        if (e.target === btn.querySelector('.langsw__globe')) btn.classList.remove('is-switching');
-      });
+      function setLang(l) { lang = l; document.documentElement.setAttribute('data-lang', l); document.documentElement.setAttribute('lang', l); translate(l); render(); }
+
+      setLang(lang);                                              /* apply default language ... */
+      document.documentElement.classList.remove('i18n-pending');  /* ... then reveal (no flash) */
+
+      if (btn) {
+        btn.addEventListener('mouseenter', function () { hover = true; suppressHover = false; render(); });
+        btn.addEventListener('mouseleave', function () { hover = false; suppressHover = false; render(); });
+        btn.addEventListener('click', function () {
+          suppressHover = true;
+          setLang(other(lang));
+          btn.classList.remove('is-switching');
+          void btn.offsetWidth;
+          btn.classList.add('is-switching');
+        });
+        btn.addEventListener('animationend', function (e) {
+          if (e.target === btn.querySelector('.langsw__globe')) btn.classList.remove('is-switching');
+        });
+      }
     })();
   </script>
 </body>
