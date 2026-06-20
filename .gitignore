@@ -1,0 +1,5 @@
+# local verification screenshots / scratch
+output/
+
+# local backups
+*.bak
