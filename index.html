@@ -7,7 +7,7 @@
   <meta name="description" content="Infra Core — კომპიუტერები, ქსელი, პრინტერები, Jabra ყურსასმენები და პროგრამული უზრუნველყოფა ბიზნესისთვის. სწრაფი მიწოდება, მონტაჟი, ოფიციალური გარანტია." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=19" />
+  <link rel="stylesheet" href="styles.css?v=20" />
   <script>document.documentElement.classList.add('i18n-pending')</script>
   <style>html.i18n-pending body{visibility:hidden}</style>
 </head>
@@ -446,9 +446,12 @@
 
   <!-- QUOTE MODAL -->
   <dialog class="qm" id="quoteModal" aria-labelledby="qm-title">
-    <button class="qm__x" type="button" data-qm-close aria-label="დახურვა">
-      <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
-    </button>
+    <div class="qm__bar">
+      <span class="qm__bartitle" aria-hidden="true">გვითხარით, რა სჭირდება თქვენს ოფისს</span>
+      <button class="qm__x" type="button" data-qm-close aria-label="დახურვა">
+        <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+      </button>
+    </div>
     <div class="ccard">
       <!-- LEFT: info -->
       <aside class="ccard__info">

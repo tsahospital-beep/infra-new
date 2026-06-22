@@ -1018,6 +1018,9 @@ button { font: inherit; cursor: pointer; }
 }
 .qm__x:hover { background: rgba(0, 0, 0, 0.1); }
 .qm__x svg { width: 15px; height: 15px; fill: currentColor; }
+/* desktop: the bar is a no-op wrapper (X stays absolute top-right, title hidden) */
+.qm__bar { display: block; }
+.qm__bartitle { display: none; }
 
 .ccard { display: grid; grid-template-columns: 0.82fr 1fr; border-radius: inherit; overflow: hidden; }
 
@@ -1102,6 +1105,18 @@ button { font: inherit; cursor: pointer; }
   .ccard__formwrap { border-left: 0; border-top: 1px solid var(--line); }
   .qform__row { grid-template-columns: 1fr; gap: 0; }
   .qform__row .qfield { margin-bottom: 14px; }
+  /* phone: pin a header (title + close) to the top of the scrolling modal */
+  .qm__bar {
+    position: sticky; top: 0; z-index: 6;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 11px 12px 11px 18px;
+    background: #fff; border-bottom: 1px solid var(--line);
+  }
+  .qm__bartitle { display: block; font-weight: 600; font-size: 1.02rem; line-height: 1.2; color: var(--ink); }
+  .qm__x { position: static; flex: none; }
+  /* the in-card eyebrow + title would duplicate the pinned header — hide them on phone */
+  .ccard__info > .ccard__path,
+  .ccard__info > #qm-title { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .qm[open], .qm.qm--closing { animation: none; } }
 
