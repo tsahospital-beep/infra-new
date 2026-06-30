@@ -981,7 +981,8 @@
         for (var c = n.firstChild; c; c = c.nextSibling) walk(c, m);
       }
       var applied = 'ka';                 /* page source markup is Georgian */
-      function translate(l) { if (l === applied) return; walk(document.body, l === 'en' ? KA2EN : EN2KA); applied = l; }
+      function reflow() { try { window.dispatchEvent(new Event('resize')); } catch (e) {} }
+      function translate(l) { if (l === applied) return; walk(document.body, l === 'en' ? KA2EN : EN2KA); applied = l; reflow(); setTimeout(reflow, 60); }
 
       var btn = document.querySelector('[data-lang-toggle]');
       var lbl = btn && btn.querySelector('.langsw__lbl');
