@@ -318,7 +318,7 @@ button { font: inherit; cursor: pointer; }
 .logo__dot { width: 26px; height: 26px; border-radius: 8px; background: var(--n-950); display: inline-grid; place-items: center; color: #fff; font-family: var(--f-mono); font-size: 0.9rem; }
 .logo__mark { height: 30px; display: inline-flex; align-items: center; flex: none; }
 .logo__mark img { height: 100%; width: auto; display: block; }
-.site-head .logo__mark img { filter: brightness(0) invert(1); }
+.site-head .logo__mark img { filter: none; }   /* brand colours (green) like the footer mark */
 /* Desktop nav: plain inline links (no pill frame), dark text — like SynthAI.
    Pushed to the right, next to the CTA button. */
 .nav {
@@ -437,7 +437,7 @@ button { font: inherit; cursor: pointer; }
 @media (min-width: 1181px) {
   .site-head .nav a { color: #fff; }
   .site-head .nav a:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
-  .site-head .logo span { color: #fff !important; }
+  .site-head .logo__txt span:first-child { color: #fff !important; }   /* keep "Infra" white; "Core" stays brand green */
 }
 @media (max-width: 1180px) {
   .site-head .navtoggle span { background: #fff; }
