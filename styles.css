@@ -1560,12 +1560,21 @@ button { font: inherit; cursor: pointer; }
   }
   .topblur { display: none; }
   .head__actions .btn--sm { display: none; }
-  .head__actions .flowbtn { display: inline-flex; font-size: 0.72rem; padding: 0 11px; min-height: 40px; }
-  .head__actions .flowbtn .flowbtn__label { margin-right: 30px; }
+  .head__actions .flowbtn { display: inline-flex; font-size: 0.68rem; padding: 0 10px; min-height: 38px; }
+  .head__actions .flowbtn .flowbtn__label { margin-right: 28px; }
+  .head__actions .flowbtn__chip { width: 26px; }
+  .head__actions .flowbtn__chip svg { width: 14px; height: 14px; }
+  /* Georgian CTA label is longer than the English one — shrink it so the
+     button never grows over the logo on phones */
+  html[data-lang="ka"] .head__actions .flowbtn { font-size: 0.52rem; letter-spacing: 0; }
 }
 @media (max-width: 560px) {
   .foot__cols { grid-template-columns: 1fr; }
   .stats { gap: 28px; }
+}
+/* very narrow phones: shrink the Georgian CTA a touch more so it always fits */
+@media (max-width: 344px) {
+  html[data-lang="ka"] .head__actions .flowbtn { font-size: 0.46rem; }
 }
 
 /* ============================================================
